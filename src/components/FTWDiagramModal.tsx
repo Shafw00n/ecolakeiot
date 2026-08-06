@@ -58,18 +58,18 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-3 sm:p-4" style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top, 0px))', paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}>
+    <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0"
         onClick={onClose}
       />
 
       {/* Modal Card */}
-      <div className="relative bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-200 my-4 sm:my-8">
+      <div className="relative flex flex-col bg-white w-full sm:max-w-4xl sm:rounded-2xl shadow-2xl border-0 sm:border border-slate-200 overflow-hidden z-10 animate-in zoom-in-95 duration-200 mx-0 sm:mx-3 sm:my-4 sm:my-8 max-h-full sm:max-h-[90vh]">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 text-white p-4 sm:p-6 relative overflow-hidden">
+        <div className="bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 text-white p-4 sm:p-6 relative overflow-hidden shrink-0">
           <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
           
           <div className="flex items-start justify-between gap-3 relative z-10">
@@ -99,7 +99,7 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Modal Body: Interactive Infographic Architecture Flow */}
-        <div className="p-4 sm:p-6 bg-slate-50 space-y-6 max-h-[75vh] overflow-y-auto">
+        <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-6 bg-slate-50 space-y-6">
           
           {/* Hardware Breakdown Highlight */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs">
@@ -190,7 +190,7 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 pb-safe bg-white border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}>
+        <div className="p-4 bg-white border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shrink-0" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}>
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <MaterialIcon name="info" className="text-teal-600 text-base" />
             <span>Dikembangkan bersama Kementerian Lingkungan Hidup & IPB University</span>
