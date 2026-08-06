@@ -107,17 +107,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Arsitektur FTW System</span>
             </button>
 
-            {onOpenPublicPortal && (
-              <button
-                onClick={onOpenPublicPortal}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-gradient-to-r from-[#0F766E] to-sky-700 hover:from-[#0d6760] hover:to-sky-800 rounded-xl transition-all shadow-xs"
-                title="Portal Aduan Masyarakat (Scan QR)"
-              >
-                <MaterialIcon name="qr_code_2" className="text-base text-sky-200" />
-                <span>Portal QR Aduan</span>
-              </button>
-            )}
-
             {/* Mode Simulation Toggle */}
             <div className="flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200 text-xs font-medium">
               <span className="text-slate-500 px-2.5 flex items-center gap-1 font-bold text-[11px] uppercase tracking-wider">
