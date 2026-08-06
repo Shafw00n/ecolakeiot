@@ -31,11 +31,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="h-screen w-full font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden bg-white">
-      <div className="h-full grid grid-cols-1 lg:grid-cols-2">
+    <div className="min-h-screen w-full font-['Plus_Jakarta_Sans',sans-serif] overflow-y-auto lg:overflow-hidden bg-white">
+      <div className="min-h-[100dvh] lg:h-screen grid grid-cols-1 lg:grid-cols-2">
         
         {/* Left Half (50%): Full-bleed Lake Image — no card, no margin, no radius */}
-        <div className="relative h-[40vh] lg:h-full bg-[#042f2c] overflow-hidden text-white">
+        <div className="relative h-[42vh] sm:h-[40vh] lg:h-full bg-[#042f2c] overflow-hidden text-white">
           <img
             src="/images/situgedelake.png"
             alt="Pemandangan Danau Situ Gede"
