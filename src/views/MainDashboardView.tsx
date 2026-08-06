@@ -197,14 +197,14 @@ export const MainDashboardView: React.FC<MainDashboardViewProps> = ({
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={onOpenFTWDiagram}
-              className="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl border border-white/20 transition-all backdrop-blur-xs flex items-center gap-2 shadow-xs"
+              className="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl border border-white/20 transition-all backdrop-blur-xs flex items-center gap-2 shadow-xs active:scale-95"
             >
               <MaterialIcon name="schema" className="text-emerald-300 text-base" />
               <span>Infografis FTW</span>
             </button>
             <button
               onClick={() => setShowPhonePopupAlert(true)}
-              className="px-3.5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5"
+              className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center gap-1.5 active:scale-95"
             >
               <MaterialIcon name="smartphone" className="text-base" />
               <span>Simulasi Notifikasi HP</span>
@@ -356,11 +356,12 @@ export const MainDashboardView: React.FC<MainDashboardViewProps> = ({
               <p className="text-xs text-slate-500">Tren perubahan telemetri parameter sensor</p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <select
                 value={chartMetric}
                 onChange={(e) => setChartMetric(e.target.value as any)}
-                className="bg-slate-50 border border-slate-200 text-xs font-bold rounded-xl px-2.5 py-1.5 text-slate-700"
+                className="bg-slate-50 border border-slate-200 text-xs font-bold rounded-xl px-3 py-2.5 text-slate-700 focus:outline-none focus:border-[#0F766E]"
+                style={{ minHeight: 44 }}
               >
                 <option value="DO">DO (Oksigen Terlarut)</option>
                 <option value="pH">pH (Derajat Keasaman)</option>
@@ -374,7 +375,7 @@ export const MainDashboardView: React.FC<MainDashboardViewProps> = ({
                   <button
                     key={t}
                     onClick={() => setChartTimeframe(t)}
-                    className={`px-2.5 py-1 rounded-lg transition-all font-bold text-xs ${
+                    className={`px-3 py-2 rounded-lg transition-all font-bold text-xs active:scale-95 ${
                       chartTimeframe === t
                         ? 'bg-[#0F766E] text-white shadow-xs'
                         : 'text-slate-600 hover:text-slate-900'
@@ -388,7 +389,7 @@ export const MainDashboardView: React.FC<MainDashboardViewProps> = ({
           </div>
 
           {/* Recharts Component */}
-          <div className="h-64 w-full">
+          <div className="h-56 sm:h-64 lg:h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={history} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>

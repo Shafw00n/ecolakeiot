@@ -140,14 +140,14 @@ export const AIAdvisorCard: React.FC<AIAdvisorCardProps> = ({ decisions, metrics
               value={userQuery}
               onChange={(e) => setUserQuery(e.target.value)}
               placeholder="Tanyakan analisis AI (misal: 'Bagaimana kondisi fosfat danau?')"
-              className="w-full bg-slate-900/90 border border-teal-800/60 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 transition-all pr-8"
+              className="w-full bg-slate-900/90 border border-teal-800/60 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 transition-all pr-8"
             />
-            <MaterialIcon name="smart_toy" className="absolute right-2.5 top-2.5 text-teal-500 text-base pointer-events-none" />
+            <MaterialIcon name="smart_toy" className="absolute right-2.5 top-3 text-teal-500 text-base pointer-events-none" />
           </div>
           <button
             type="submit"
             disabled={isGenerating}
-            className="px-4 py-2 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 disabled:opacity-50"
+            className="px-4 py-2.5 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-1.5 disabled:opacity-50 active:scale-95"
           >
             {isGenerating ? (
               <>

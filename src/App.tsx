@@ -298,7 +298,7 @@ export default function App() {
         )}
 
         {/* Main Content Workspace View */}
-        <main className="flex-1 p-4 lg:p-6 pb-20 lg:pb-8 overflow-x-hidden min-w-0">
+        <main className="flex-1 p-4 lg:p-6 pb-24 lg:pb-8 overflow-x-hidden min-w-0">
           {activeTab === 'monitoring' && (
             <MainDashboardView
               metrics={waterMetrics}
@@ -363,7 +363,8 @@ export default function App() {
 
       {/* Toast Notification Floating Alert */}
       {toastMessage && (
-        <div className="fixed bottom-16 right-4 sm:bottom-6 sm:right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-teal-500/40 text-xs font-bold flex items-center gap-2.5 animate-in fade-in slide-in-from-bottom-3">
+        <div className="fixed bottom-20 lg:bottom-6 right-3 sm:right-6 z-[60] max-w-[calc(100vw-1.5rem)] sm:max-w-md bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl border border-teal-500/40 text-xs font-bold flex items-center gap-2.5 animate-in fade-in slide-in-from-bottom-3 mb-safe"
+          style={{ marginBottom: 'env(safe-area-inset-bottom, 0px)' }}>
           <MaterialIcon name="info" className="text-teal-400 text-lg" />
           <span>{toastMessage}</span>
         </div>

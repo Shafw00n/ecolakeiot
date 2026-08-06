@@ -174,7 +174,77 @@ export const IPBView: React.FC<IPBViewProps> = ({
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Responsive Sample Cards (Mobile) */}
+        <div className="md:hidden space-y-3">
+          {samples.map((s) => (
+            <div key={s.id} className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+              <div className="p-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-8 h-8 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center shrink-0">
+                    <MaterialIcon name="science" className="text-base" />
+                  </span>
+                  <div className="min-w-0">
+                    <span className="block font-extrabold text-slate-900 text-xs truncate">{s.sampleCode}</span>
+                    <span className="block text-[10px] text-slate-400 truncate">{s.location}</span>
+                  </div>
+                </div>
+                <span
+                  className={`shrink-0 px-2 py-1 rounded-full text-[10px] font-bold ${
+                    s.validationStatus === 'Validated'
+                      ? 'bg-emerald-100 text-emerald-800'
+                      : s.validationStatus === 'Pending'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'bg-rose-100 text-rose-800'
+                  }`}
+                >
+                  {s.validationStatus}
+                </span>
+              </div>
+
+              <div className="p-3.5 grid grid-cols-3 gap-2 text-center">
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">pH Lab</span>
+                  <span className="font-bold text-slate-800 text-xs">{s.ph}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">DO Lab</span>
+                  <span className="font-bold text-teal-700 text-xs">{s.do} mg/L</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">Nitrat</span>
+                  <span className="font-bold text-slate-800 text-xs">{s.nitrate}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">Fosfat</span>
+                  <span className="font-bold text-slate-800 text-xs">{s.phosphate}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">Waktu</span>
+                  <span className="font-bold text-slate-600 text-[10px]">{s.collectionDate}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">Peneliti</span>
+                  <span className="font-bold text-slate-700 text-[10px] truncate block">{s.researcher}</span>
+                </div>
+              </div>
+
+              {s.validationStatus === 'Pending' && (
+                <div className="px-3.5 pb-3.5">
+                  <button
+                    onClick={() => onValidateSample(s.id)}
+                    className="w-full px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-[11px] active:scale-[0.99] transition-all"
+                  >
+                    <MaterialIcon name="check_circle" className="text-sm inline-block mr-1 align-middle" />
+                    Validasi Sampel
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Lab Results Table (Tablet & Desktop) */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="bg-slate-50 text-slate-500 uppercase font-bold text-[10px] tracking-wider border-b border-slate-200">
@@ -218,7 +288,7 @@ export const IPBView: React.FC<IPBViewProps> = ({
                     {s.validationStatus === 'Pending' && (
                       <button
                         onClick={() => onValidateSample(s.id)}
-                        className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px]"
+                        className="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] active:scale-95 transition-all"
                       >
                         Validasi
                       </button>

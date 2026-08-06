@@ -102,7 +102,7 @@ export const CommunityView: React.FC<CommunityViewProps> = ({ onOpenQRScanner, o
 
           <button
             onClick={() => setJoinedCleanup(!joinedCleanup)}
-            className={`w-full py-2.5 rounded-xl font-extrabold text-xs transition-all shadow-md flex items-center justify-center gap-2 ${
+            className={`w-full py-3 rounded-xl font-extrabold text-xs transition-all shadow-md flex items-center justify-center gap-2 active:scale-[0.98] ${
               joinedCleanup
                 ? 'bg-emerald-600 text-white'
                 : 'bg-slate-900 hover:bg-slate-800 text-white'
@@ -168,7 +168,7 @@ export const CommunityView: React.FC<CommunityViewProps> = ({ onOpenQRScanner, o
 
             <button
               type="submit"
-              className="w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2"
+              className="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
             >
               <MaterialIcon name="send" className="text-base" />
               <span>Kirim Laporan Pengamatan Warga</span>

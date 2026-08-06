@@ -231,13 +231,13 @@ export const RangerView: React.FC<RangerViewProps> = ({
 
             <div>
               <label className="block text-slate-700 font-bold mb-1">Tingkat Urgensi (Severity)</label>
-              <div className="flex gap-2">
+              <div className="grid grid-cols-2 sm:flex gap-2">
                 {(['Low', 'Medium', 'High', 'Critical'] as const).map((sev) => (
                   <button
                     type="button"
                     key={sev}
                     onClick={() => setReportForm({ ...reportForm, severity: sev })}
-                    className={`flex-1 py-2 rounded-xl text-xs font-bold border transition-all ${
+                    className={`sm:flex-1 py-2.5 rounded-xl text-xs font-bold border transition-all active:scale-95 ${
                       reportForm.severity === sev
                         ? sev === 'Critical' || sev === 'High'
                           ? 'bg-rose-600 text-white border-rose-600 shadow-xs'
@@ -267,12 +267,13 @@ export const RangerView: React.FC<RangerViewProps> = ({
             <div>
               <label className="block text-slate-700 font-bold mb-1">Foto Bukti Lapangan</label>
               <div className="flex items-center gap-3">
-                <label className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl cursor-pointer flex items-center gap-2 border border-slate-300">
+                <label className="px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl cursor-pointer flex items-center gap-2 border border-slate-300 active:scale-95 transition-all">
                   <MaterialIcon name="photo_camera" className="text-base text-slate-600" />
                   <span>{reportForm.photoPreview ? 'Ganti Foto' : 'Unggah Foto'}</span>
                   <input
                     type="file"
                     accept="image/*"
+                    capture="environment"
                     onChange={handlePhotoUploadSim}
                     className="hidden"
                   />
@@ -295,7 +296,7 @@ export const RangerView: React.FC<RangerViewProps> = ({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all flex items-center gap-2 disabled:opacity-50"
+                className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-xs rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 active:scale-[0.98]"
               >
                 {isSubmitting ? (
                   <>

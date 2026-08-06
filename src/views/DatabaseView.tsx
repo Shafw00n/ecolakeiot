@@ -98,7 +98,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
         <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-medium">
           <button
             onClick={() => setFilterStatus('all')}
-            className={`px-3 py-1 rounded-lg transition-all ${
+            className={`px-3.5 py-2 rounded-lg transition-all active:scale-95 ${
               filterStatus === 'all' ? 'bg-white font-bold text-teal-700 shadow-xs' : 'text-slate-600'
             }`}
           >
@@ -106,7 +106,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
           </button>
           <button
             onClick={() => setFilterStatus('active')}
-            className={`px-3 py-1 rounded-lg transition-all ${
+            className={`px-3.5 py-2 rounded-lg transition-all active:scale-95 ${
               filterStatus === 'active' ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'text-slate-600'
             }`}
           >
@@ -114,7 +114,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
           </button>
           <button
             onClick={() => setFilterStatus('warning')}
-            className={`px-3 py-1 rounded-lg transition-all ${
+            className={`px-3.5 py-2 rounded-lg transition-all active:scale-95 ${
               filterStatus === 'warning' ? 'bg-amber-500 text-white font-bold shadow-xs' : 'text-slate-600'
             }`}
           >
@@ -123,8 +123,68 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
         </div>
       </div>
 
-      {/* Telemetry Database Table */}
-      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+      {/* Telemetry Database - Responsive Cards (Mobile) */}
+      <div className="md:hidden space-y-3">
+        {filteredRecords.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-8 text-center text-sm text-slate-400">
+            Tidak ada sensor yang cocok dengan pencarian.
+          </div>
+        ) : (
+          filteredRecords.map((r) => (
+            <div key={r.id} className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+              <div className="flex items-center justify-between gap-2 p-3.5 bg-slate-50 border-b border-slate-100">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-8 h-8 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center shrink-0">
+                    <MaterialIcon name="sensors" className="text-base" />
+                  </span>
+                  <div className="min-w-0">
+                    <span className="block font-extrabold text-slate-900 text-xs truncate">{r.id}</span>
+                    <span className="block text-[10px] text-slate-400 truncate">{r.type}</span>
+                  </div>
+                </div>
+                <span
+                  className={`shrink-0 px-2 py-1 rounded-full text-[10px] font-bold ${
+                    r.status === 'Active'
+                      ? 'bg-emerald-100 text-emerald-800'
+                      : 'bg-amber-100 text-amber-800'
+                  }`}
+                >
+                  {r.status}
+                </span>
+              </div>
+
+              <div className="p-3.5 grid grid-cols-2 gap-2.5 text-xs">
+                <div className="bg-slate-50 rounded-xl p-2.5">
+                  <span className="text-[10px] text-slate-400 block font-semibold">Unit FTW</span>
+                  <span className="font-extrabold text-teal-700">{r.unit}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2.5">
+                  <span className="text-[10px] text-slate-400 block font-semibold">Lokasi</span>
+                  <span className="font-bold text-slate-700 truncate block">{r.location}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2.5">
+                  <span className="text-[10px] text-slate-400 block font-semibold">Nilai Terakhir</span>
+                  <span className="font-extrabold text-slate-900">{r.value}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2.5">
+                  <span className="text-[10px] text-slate-400 block font-semibold">Update</span>
+                  <span className="font-bold text-slate-600">{r.lastUpdate}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2.5 col-span-2">
+                  <span className="text-[10px] text-slate-400 block font-semibold">Status Power</span>
+                  <span className="flex items-center gap-1 font-semibold text-emerald-700">
+                    <MaterialIcon name="battery_full" className="text-emerald-500 text-sm" />
+                    {r.battery}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Telemetry Database Table (Tablet & Desktop) */}
+      <div className="hidden md:block bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>

@@ -20,7 +20,90 @@
   .icon-filled {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
+
+  /* ---------- Native-app touch UX ---------- */
+  /* Minimum accessible touch target map tapped/clicked. */
+  .touch-target {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Prevent iOS form zoom & blue tap highlight */
+  .tap-highlight-none,
+  .tap-target-none {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Safe-area helpers for notches / Dynamic Island / gesture bars */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .h-safe-bottom {
+    height: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Recharts tooltip: larger, touch-friendly */
+  .recharts-tooltip-cursor {
+    r: 6;
+  }
 }
+
+/* ---------- Global mobile-friendly base ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+}
+
+body {
+  margin: 0;
+  /* Momentum scroll for native-feel on iOS */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  height: 100%;
+}
+
+/* Fluid, responsive root font sizing */
+html {
+  font-size: 16px;
+}
+
+/* Softer, scrollbar-tinted touch interactions */
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+/* Larger native tap highlight is removed, replaced by custom transitions */
+button,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent horizontal overflow caused by absolutely positioned decorations */
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+/* Keep app filling full height including dynamic toolbars */
+#root {
+  min-height: 100%;
+  min-height: 100dvh;
+}
+
+/* Custom smooth scrollbar */
 
 /* Custom smooth scrollbar */
 ::-webkit-scrollbar {

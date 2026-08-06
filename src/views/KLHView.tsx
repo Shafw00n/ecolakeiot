@@ -112,7 +112,75 @@ export const KLHView: React.FC<KLHViewProps> = ({
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Responsive Lake Cards (Mobile) */}
+        <div className="md:hidden space-y-3">
+          {lakes.map((lake) => (
+            <div
+              key={lake.id}
+              className={`rounded-2xl border overflow-hidden ${
+                selectedLake.id === lake.id ? 'border-teal-500 ring-2 ring-teal-500/20' : 'border-slate-200'
+              }`}
+            >
+              <div className="p-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <MaterialIcon name="location_on" className="text-teal-600 text-lg shrink-0" />
+                  <div className="min-w-0">
+                    <h4 className="font-extrabold text-slate-900 text-xs truncate">{lake.name}</h4>
+                    <p className="text-[10px] text-slate-400 truncate">{lake.location}</p>
+                  </div>
+                </div>
+                <span
+                  className={`shrink-0 px-2 py-1 rounded-full text-[10px] font-bold ${
+                    lake.status === 'Good'
+                      ? 'bg-emerald-100 text-emerald-800'
+                      : 'bg-amber-100 text-amber-800'
+                  }`}
+                >
+                  {lake.status}
+                </span>
+              </div>
+
+              <div className="p-3.5 grid grid-cols-3 gap-2 text-center">
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">Luas</span>
+                  <span className="font-bold text-slate-800 text-xs">{lake.areaHectares} Ha</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">FTW</span>
+                  <span className="font-bold text-slate-800 text-xs">{lake.ftwUnits} Unit</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">WQI</span>
+                  <span className="font-extrabold text-teal-700 text-xs">{lake.wqiScore}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">pH</span>
+                  <span className="font-bold text-slate-800 text-xs">{lake.avgPh}</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">DO</span>
+                  <span className="font-bold text-slate-800 text-xs">{lake.avgDo} mg/L</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-2">
+                  <span className="text-[9px] text-slate-400 block font-semibold">Kekeruhan</span>
+                  <span className="font-bold text-slate-800 text-xs">{lake.avgTurbidity} NTU</span>
+                </div>
+              </div>
+
+              <div className="px-3.5 pb-3.5">
+                <button
+                  onClick={() => setSelectedLake(lake)}
+                  className="w-full px-3 py-2.5 bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-semibold rounded-xl text-[11px] transition-all active:scale-[0.99]"
+                >
+                  Detail Kebijakan
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Lake Comparison Table (Tablet & Desktop) */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="bg-slate-50 text-slate-500 uppercase font-bold text-[10px] tracking-wider border-b border-slate-200">
@@ -161,7 +229,7 @@ export const KLHView: React.FC<KLHViewProps> = ({
                   <td className="p-3">
                     <button
                       onClick={() => setSelectedLake(lake)}
-                      className="px-2.5 py-1 bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-semibold rounded-lg text-[11px] transition-all"
+                      className="px-3 py-2 bg-white border border-slate-200 hover:border-teal-500 text-slate-700 font-semibold rounded-lg text-[11px] transition-all active:scale-95"
                     >
                       Detail Kebijakan
                     </button>

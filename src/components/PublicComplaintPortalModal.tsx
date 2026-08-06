@@ -94,8 +94,8 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-md overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-6 border border-slate-200 shadow-2xl relative my-8 animate-in fade-in slide-in-from-bottom-3">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/75 backdrop-blur-md overflow-y-auto" style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top, 0px))', paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}>
+      <div className="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-6 border border-slate-200 shadow-2xl relative my-4 sm:my-8 animate-in fade-in slide-in-from-bottom-3">
         
         {/* Modal Header */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
@@ -112,7 +112,8 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-all"
+            className="flex items-center justify-center w-11 h-11 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-all active:scale-95"
+            aria-label="Tutup form"
           >
             <MaterialIcon name="close" className="text-xl" />
           </button>
@@ -164,13 +165,13 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
             <div className="flex gap-2 pt-2">
               <button
                 onClick={handleReset}
-                className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition-all"
+                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs rounded-xl transition-all active:scale-[0.98]"
               >
                 Buat Laporan Lain
               </button>
               <button
                 onClick={onClose}
-                className="flex-1 py-2.5 bg-[#0F766E] hover:bg-[#0d6760] text-white font-bold text-xs rounded-xl transition-all shadow-md"
+                className="flex-1 py-3 bg-[#0F766E] hover:bg-[#0d6760] text-white font-bold text-xs rounded-xl transition-all shadow-md active:scale-[0.98]"
               >
                 Selesai & Tutup
               </button>
@@ -280,6 +281,7 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
                   <input
                     type="file"
                     accept="image/*"
+                    capture="environment"
                     onChange={handleImageFileChange}
                     className="hidden"
                   />
@@ -330,13 +332,13 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all"
+                className="flex-1 px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all active:scale-[0.98]"
               >
                 Batal
               </button>
               <button
                 type="submit"
-                className="px-6 py-2.5 bg-[#0F766E] hover:bg-[#0d6760] text-white font-extrabold text-xs rounded-xl transition-all shadow-md flex items-center gap-2"
+                className="flex-1 px-6 py-3 bg-[#0F766E] hover:bg-[#0d6760] text-white font-extrabold text-xs rounded-xl transition-all shadow-md flex items-center justify-center gap-2 active:scale-[0.98]"
               >
                 <MaterialIcon name="send" className="text-base" />
                 <span>Kirim Laporan</span>

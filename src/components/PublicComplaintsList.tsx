@@ -86,12 +86,12 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
 
       {/* Status Filter Tabs */}
       <div className="flex items-center justify-between gap-2 flex-wrap">
-        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
+        <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl overflow-x-auto max-w-full">
           {(['Semua', 'Baru', 'Diproses', 'Selesai'] as const).map((st) => (
             <button
               key={st}
               onClick={() => setFilterStatus(st)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap active:scale-95 ${
                 filterStatus === st
                   ? 'bg-white text-slate-900 shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -163,7 +163,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
                   {c.photoUrl && (
                     <button
                       onClick={() => setSelectedImage(c.photoUrl || null)}
-                      className="text-[#0F766E] hover:underline font-bold flex items-center gap-1 text-[11px]"
+                      className="text-[#0F766E] hover:underline font-bold flex items-center gap-1 text-[11px] px-2 py-2"
                     >
                       <MaterialIcon name="image" className="text-base" />
                       <span>Lihat Foto Bukti</span>
@@ -177,7 +177,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
                     {c.status === 'Baru' && (
                       <button
                         onClick={() => onUpdateStatus(c.id, 'Diproses')}
-                        className="px-3 py-1 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1"
+                        className="px-3.5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1 active:scale-95"
                       >
                         <MaterialIcon name="engineering" className="text-sm" />
                         <span>Proses Laporan</span>
@@ -187,7 +187,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
                     {c.status !== 'Selesai' && (
                       <button
                         onClick={() => onUpdateStatus(c.id, 'Selesai')}
-                        className="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1"
+                        className="px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1 active:scale-95"
                       >
                         <MaterialIcon name="check_circle" className="text-sm" />
                         <span>Tandai Selesai</span>

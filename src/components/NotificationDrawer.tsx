@@ -57,11 +57,11 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
         onClick={onClose}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+      <div className="fixed inset-y-0 right-0 max-w-full flex">
+        <div className="w-screen sm:w-full sm:max-w-md bg-white shadow-2xl flex flex-col">
           
           {/* Drawer Header */}
-          <div className="p-4 bg-slate-900 text-white flex items-center justify-between">
+          <div className="p-4 bg-slate-900 text-white flex items-center justify-between" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}>
             <div className="flex items-center gap-2">
               <MaterialIcon name="notifications" className="text-teal-400 text-2xl" />
               <div>
@@ -71,7 +71,8 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
             </div>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white"
+              className="flex items-center justify-center w-11 h-11 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white active:scale-95 transition-all"
+              aria-label="Tutup notifikasi"
             >
               <MaterialIcon name="close" className="text-xl" />
             </button>
@@ -79,10 +80,10 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
 
           {/* Controls & Filter Bar */}
           <div className="px-4 py-3 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-1 text-xs font-medium">
+            <div className="flex items-center gap-1.5 text-xs font-medium">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
+                className={`px-3.5 py-2.5 rounded-xl transition-all active:scale-95 ${
                   filter === 'all'
                     ? 'bg-teal-600 text-white font-bold'
                     : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'
@@ -92,7 +93,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
               </button>
               <button
                 onClick={() => setFilter('critical')}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
+                className={`px-3.5 py-2.5 rounded-xl transition-all active:scale-95 ${
                   filter === 'critical'
                     ? 'bg-rose-600 text-white font-bold'
                     : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'
@@ -102,7 +103,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
               </button>
               <button
                 onClick={() => setFilter('public')}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
+                className={`px-3.5 py-2.5 rounded-xl transition-all active:scale-95 ${
                   filter === 'public'
                     ? 'bg-[#0F766E] text-white font-bold'
                     : 'bg-white text-slate-600 hover:bg-slate-200 border border-slate-200'
@@ -114,7 +115,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
 
             <button
               onClick={onMarkAllRead}
-              className="text-[11px] font-semibold text-teal-700 hover:underline"
+              className="text-[11px] font-semibold text-teal-700 hover:underline px-2 py-2.5"
             >
               Tandai Dibaca
             </button>
@@ -161,10 +162,10 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
           </div>
 
           {/* Footer */}
-          <div className="p-3 bg-slate-50 border-t border-slate-200 text-right">
+          <div className="p-3 bg-slate-50 border-t border-slate-200 text-right" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}>
             <button
               onClick={onClearNotifications}
-              className="text-xs text-slate-500 hover:text-slate-800 font-medium"
+              className="text-xs text-slate-500 hover:text-slate-800 font-medium px-3 py-2.5"
             >
               Bersihkan Notifikasi
             </button>

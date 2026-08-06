@@ -58,7 +58,7 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-3 sm:p-4" style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top, 0px))', paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}>
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
@@ -66,21 +66,21 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
       />
 
       {/* Modal Card */}
-      <div className="relative bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-200 my-8">
+      <div className="relative bg-white w-full max-w-4xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-10 animate-in fade-in zoom-in-95 duration-200 my-4 sm:my-8">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 text-white p-6 relative overflow-hidden">
+        <div className="bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 text-white p-4 sm:p-6 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
           
-          <div className="flex items-start justify-between gap-4 relative z-10">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-start justify-between gap-3 relative z-10">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span className="bg-teal-500/20 text-teal-300 border border-teal-500/30 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                   Sistem Infografis FTW IoT
                 </span>
                 <span className="text-slate-400 text-xs">• Situ Gede Smart Lake</span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight">
+              <h2 className="text-lg sm:text-2xl font-extrabold tracking-tight">
                 Alur Kerja IoT-Enabled Floating Treatment Wetland
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
@@ -90,7 +90,8 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors"
+              className="flex items-center justify-center w-11 h-11 shrink-0 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors active:scale-95"
+              aria-label="Tutup infografis"
             >
               <MaterialIcon name="close" className="text-xl" />
             </button>
@@ -98,7 +99,7 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Modal Body: Interactive Infographic Architecture Flow */}
-        <div className="p-6 bg-slate-50 space-y-6 max-h-[75vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 bg-slate-50 space-y-6 max-h-[75vh] overflow-y-auto">
           
           {/* Hardware Breakdown Highlight */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs">
@@ -189,14 +190,14 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 bg-white border-t border-slate-200 flex items-center justify-between">
+        <div className="p-4 pb-safe bg-white border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}>
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <MaterialIcon name="info" className="text-teal-600 text-base" />
             <span>Dikembangkan bersama Kementerian Lingkungan Hidup & IPB University</span>
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-xl transition-colors"
+            className="w-full sm:w-auto px-5 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs rounded-xl transition-colors active:scale-95"
           >
             Tutup Skema
           </button>

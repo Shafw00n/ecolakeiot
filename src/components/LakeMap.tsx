@@ -19,6 +19,7 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
   const [selectedUnit, setSelectedUnit] = useState<FTWUnit | null>(ftwUnits[0] || null);
   const [isCardCollapsed, setIsCardCollapsed] = useState<boolean>(false);
   const [activeLayer, setActiveLayer] = useState<'all' | 'ftw' | 'ranger'>('all');
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
   const rangerPosition = {
     name: 'Patroli Ranger-04 (Ahmad Fauzi)',
@@ -29,11 +30,18 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col h-full">
+    <div
+      className={`bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col ${
+        isFullscreen
+          ? 'fixed inset-0 z-[70] rounded-none border-0'
+          : 'h-full'
+      }`}
+    >
       {/* Map Header */}
-      <div className="p-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2 bg-slate-50/50">
+      <div className={`p-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2 bg-slate-50/50 ${isFullscreen ? '' : ''}`}
+        style={isFullscreen ? { paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' } : undefined}>
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center">
             <MaterialIcon name="map" className="text-xl" />
           </div>
           <div>
@@ -42,43 +50,55 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
           </div>
         </div>
 
-        {/* Layer Filters */}
-        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 text-xs font-medium">
+        <div className="flex items-center gap-1.5">
+          {/* Fullscreen Toggle */}
           <button
-            onClick={() => setActiveLayer('all')}
-            className={`px-2.5 py-1 rounded-md transition-all ${
-              activeLayer === 'all'
-                ? 'bg-teal-600 text-white font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
+            onClick={() => setIsFullscreen(!isFullscreen)}
+            className="flex items-center justify-center w-9 h-9 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-[#0F766E] hover:bg-teal-50 transition-all active:scale-95"
+            title={isFullscreen ? 'Keluar layar penuh' : 'Layar penuh'}
+            aria-label={isFullscreen ? 'Keluar layar penuh' : 'Layar penuh'}
           >
-            Semua Pin
+            <MaterialIcon name={isFullscreen ? 'fullscreen_exit' : 'fullscreen'} className="text-lg" />
           </button>
-          <button
-            onClick={() => setActiveLayer('ftw')}
-            className={`px-2.5 py-1 rounded-md transition-all ${
-              activeLayer === 'ftw'
-                ? 'bg-teal-600 text-white font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            FTW Only
-          </button>
-          <button
-            onClick={() => setActiveLayer('ranger')}
-            className={`px-2.5 py-1 rounded-md transition-all ${
-              activeLayer === 'ranger'
-                ? 'bg-teal-600 text-white font-bold'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            Ranger
-          </button>
+
+          {/* Layer Filters */}
+          <div className="flex items-center gap-0.5 bg-white p-1 rounded-lg border border-slate-200 text-xs font-medium">
+            <button
+              onClick={() => setActiveLayer('all')}
+              className={`px-2.5 py-2 rounded-md transition-all active:scale-95 ${
+                activeLayer === 'all'
+                  ? 'bg-teal-600 text-white font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Semua
+            </button>
+            <button
+              onClick={() => setActiveLayer('ftw')}
+              className={`px-2.5 py-2 rounded-md transition-all active:scale-95 ${
+                activeLayer === 'ftw'
+                  ? 'bg-teal-600 text-white font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              FTW
+            </button>
+            <button
+              onClick={() => setActiveLayer('ranger')}
+              className={`px-2.5 py-2 rounded-md transition-all active:scale-95 ${
+                activeLayer === 'ranger'
+                  ? 'bg-teal-600 text-white font-bold'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Ranger
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Map Interactive Canvas */}
-      <div className="relative flex-1 min-h-[320px] bg-gradient-to-br from-sky-100 via-emerald-100/40 to-teal-100 overflow-hidden flex items-center justify-center">
+      <div className={`relative flex-1 min-h-[320px] bg-gradient-to-br from-sky-100 via-emerald-100/40 to-teal-100 overflow-hidden flex items-center justify-center ${isFullscreen ? 'min-h-0' : ''}`}>
         
         {/* Lake Water Vector SVG Shape */}
         <svg
@@ -173,7 +193,7 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
 
         {/* Selected Unit Popup Card (Overlaid at bottom of map) */}
         {selectedUnit && !isCardCollapsed ? (
-          <div className="absolute bottom-3 left-3 right-3 sm:left-4 sm:right-auto sm:w-88 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-slate-200/90 shadow-2xl z-20 animate-in fade-in slide-in-from-bottom-2">
+          <div className="absolute bottom-3 left-3 right-3 sm:left-4 sm:right-auto sm:w-88 bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-slate-200/90 shadow-2xl z-20 animate-in fade-in slide-in-from-bottom-2 max-h-[60%] overflow-y-auto">
             <div className="flex items-start justify-between gap-2 mb-2">
               <div>
                 <span className="text-[10px] font-bold bg-[#0F766E]/15 text-[#0F766E] px-2 py-0.5 rounded-md uppercase">
@@ -199,14 +219,14 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
                 {/* Open / Close / Minimize Control Buttons */}
                 <button
                   onClick={() => setIsCardCollapsed(true)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                  className="flex items-center justify-center w-9 h-9 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors active:scale-95"
                   title="Tutup Detail Map"
                 >
                   <MaterialIcon name="keyboard_arrow_down" className="text-lg" />
                 </button>
                 <button
                   onClick={() => setIsCardCollapsed(true)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                  className="flex items-center justify-center w-9 h-9 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors active:scale-95"
                   title="Tutup Card"
                 >
                   <MaterialIcon name="close" className="text-base" />
@@ -249,7 +269,7 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
               setIsCardCollapsed(false);
               if (!selectedUnit && ftwUnits.length > 0) setSelectedUnit(ftwUnits[0]);
             }}
-            className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md rounded-xl px-3.5 py-2 border border-slate-200 shadow-lg text-xs font-bold text-[#0F766E] flex items-center gap-2 hover:bg-emerald-50 transition-all z-20"
+            className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md rounded-xl px-3.5 py-2.5 border border-slate-200 shadow-lg text-xs font-bold text-[#0F766E] flex items-center gap-2 hover:bg-emerald-50 transition-all z-20 active:scale-95"
             title="Buka Detail Stasiun FTW"
           >
             <MaterialIcon name="info" className="text-base text-[#0F766E]" />

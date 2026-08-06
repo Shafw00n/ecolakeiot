@@ -29,8 +29,8 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md">
-      <div className="bg-slate-900 text-white rounded-2xl max-w-md w-full p-6 border border-slate-700 shadow-2xl relative overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/70 backdrop-blur-md" style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top, 0px))', paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}>
+      <div className="bg-slate-900 text-white rounded-2xl max-w-md w-full p-4 sm:p-6 border border-slate-700 shadow-2xl relative overflow-hidden">
         
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
@@ -38,7 +38,7 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
             <MaterialIcon name="qr_code_scanner" className="text-teal-400 text-2xl" />
             <h3 className="font-bold text-slate-100 text-base">Simulasi Scan QR Sensor IoT</h3>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white">
+          <button onClick={onClose} className="flex items-center justify-center w-11 h-11 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all active:scale-95" aria-label="Tutup pemindai">
             <MaterialIcon name="close" className="text-xl" />
           </button>
         </div>
@@ -90,7 +90,7 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
                     onClose();
                     onOpenPublicPortal();
                   }}
-                  className="w-full mt-3 py-2.5 bg-[#0F766E] hover:bg-[#0d6760] text-white font-extrabold text-xs rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                  className="w-full mt-3 py-3 bg-[#0F766E] hover:bg-[#0d6760] text-white font-extrabold text-xs rounded-xl transition-all shadow-md flex items-center justify-center gap-2 active:scale-[0.98]"
                 >
                   <MaterialIcon name="record_voice_over" className="text-base" />
                   <span>Buka Form Aduan Masyarakat (Tanpa Login)</span>
@@ -135,7 +135,7 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
                   onClose();
                   onOpenPublicPortal(loc);
                 }}
-                className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
               >
                 <MaterialIcon name="report_problem" className="text-base" />
                 <span>Kirim Laporan Aduan untuk {scannedUnit.id}</span>
@@ -144,7 +144,7 @@ export const QRScannerModal: React.FC<QRScannerModalProps> = ({
 
             <button
               onClick={() => setScannedUnit(null)}
-              className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition-all"
+              className="w-full py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition-all active:scale-[0.98]"
             >
               Scan Kode QR Lain
             </button>

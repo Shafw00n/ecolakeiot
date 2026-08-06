@@ -47,8 +47,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           {!isMasyarakat && (
             <button
               onClick={onMobileMenuToggle}
-              className="lg:hidden p-2 rounded-xl transition-colors text-slate-600 hover:bg-slate-100"
+              className="lg:hidden flex items-center justify-center w-11 h-11 rounded-xl transition-colors text-slate-600 hover:bg-slate-100 active:scale-95 tap-target-none"
+              style={{ minWidth: 48, minHeight: 48 }}
               title="Buka Menu"
+              aria-label="Buka menu navigasi"
             >
               <MaterialIcon name="menu" className="text-2xl" />
             </button>
@@ -101,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="hidden md:flex items-center gap-2">
             <button
               onClick={onOpenFTWDiagram}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-sky-800 bg-sky-50 hover:bg-sky-100/80 rounded-xl border border-sky-200 transition-all shadow-xs"
+              className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-sky-800 bg-sky-50 hover:bg-sky-100/80 rounded-xl border border-sky-200 transition-all shadow-xs active:scale-95"
             >
               <MaterialIcon name="schema" className="text-base text-sky-600" />
               <span>Arsitektur FTW System</span>
@@ -115,30 +117,30 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
               <button
                 onClick={() => onSimulationModeChange('Good')}
-                className={`px-3 py-1 rounded-lg transition-all font-semibold ${
+                className={`px-3.5 py-2 rounded-lg transition-all font-semibold ${
                   simulationMode === 'Good'
                     ? 'bg-emerald-600 text-white shadow-xs font-bold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
                 }`}
               >
                 Normal
               </button>
               <button
                 onClick={() => onSimulationModeChange('Warning')}
-                className={`px-3 py-1 rounded-lg transition-all font-semibold ${
+                className={`px-3.5 py-2 rounded-lg transition-all font-semibold ${
                   simulationMode === 'Warning'
                     ? 'bg-amber-500 text-white shadow-xs font-bold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
                 }`}
               >
                 Peringatan
               </button>
               <button
                 onClick={() => onSimulationModeChange('Critical')}
-                className={`px-3 py-1 rounded-lg transition-all font-semibold ${
+                className={`px-3.5 py-2 rounded-lg transition-all font-semibold ${
                   simulationMode === 'Critical'
                     ? 'bg-rose-600 text-white shadow-xs font-bold'
-                    : 'text-slate-600 hover:text-slate-900'
+                    : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
                 }`}
               >
                 Kritis
@@ -154,8 +156,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           {!isMasyarakat && (
             <button
               onClick={onToggleNotifications}
-              className="relative p-2.5 rounded-xl transition-colors border bg-white text-slate-500 hover:text-slate-800 hover:bg-slate-100 border-slate-200/80"
+              className="relative flex items-center justify-center w-11 h-11 rounded-xl transition-colors border bg-white text-slate-500 hover:text-slate-800 hover:bg-slate-100 border-slate-200/80 active:scale-95"
+              style={{ minWidth: 48, minHeight: 48 }}
               title="Notifikasi System"
+              aria-label="Buka notifikasi"
             >
               <MaterialIcon name="notifications" className="text-xl" />
               {unreadCount > 0 && (
@@ -172,7 +176,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           {isMasyarakat ? (
             <button
               onClick={() => onLogout()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-emerald-100 text-xs font-semibold border border-white/20 transition-all shadow-xs"
+              className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-emerald-50 text-xs font-semibold border border-white/25 transition-all shadow-xs active:scale-95"
+              style={{ minHeight: 48 }}
               title="Kembali ke halaman login"
             >
               <MaterialIcon name="logout" className="text-base" />
@@ -182,7 +187,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative">
               <button
                 onClick={() => setShowRoleDropdown(!showRoleDropdown)}
-                className="flex items-center gap-2.5 p-1.5 rounded-xl transition-all border shadow-xs bg-white hover:bg-slate-100 border-slate-200 text-slate-900"
+                className="flex items-center gap-2.5 p-1.5 rounded-xl transition-all border shadow-xs bg-white hover:bg-slate-100 border-slate-200 text-slate-900 active:scale-[0.98]"
+                style={{ minHeight: 48 }}
               >
                 <img
                   src={currentUser.avatar}
@@ -227,7 +233,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                           onRoleChange(r);
                           setShowRoleDropdown(false);
                         }}
-                        className={`w-full text-left px-4 py-2.5 text-xs flex items-center justify-between transition-colors ${
+                        className={`w-full text-left px-4 py-3 text-xs flex items-center justify-between transition-colors active:scale-[0.99] ${
                           isActive
                             ? 'bg-emerald-50 text-emerald-900 font-bold border-l-4 border-[#0F766E]'
                             : 'text-slate-700 hover:bg-slate-50'
@@ -266,7 +272,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         setShowRoleDropdown(false);
                         onLogout();
                       }}
-                      className="w-full text-left px-3 py-2 text-xs text-rose-600 hover:bg-rose-50 rounded-xl flex items-center gap-2 font-semibold"
+                      className="w-full text-left px-3 py-3 text-xs text-rose-600 hover:bg-rose-50 rounded-xl flex items-center gap-2 font-semibold"
                     >
                       <MaterialIcon name="logout" className="text-base" />
                       <span>Keluar Simulasi</span>

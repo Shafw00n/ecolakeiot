@@ -316,6 +316,7 @@ export const MasyarakatView: React.FC<MasyarakatViewProps> = ({
                     <input
                       type="file"
                       accept="image/*"
+                      capture="environment"
                       onChange={handleImageFileChange}
                       className="hidden"
                     />
@@ -349,7 +350,7 @@ export const MasyarakatView: React.FC<MasyarakatViewProps> = ({
                           setPhotoPreview(null);
                           setPhotoUrl('');
                         }}
-                        className="absolute top-2 right-2 p-1.5 bg-slate-900/80 text-white rounded-full hover:bg-rose-600 transition-all"
+                        className="absolute top-2 right-2 flex items-center justify-center w-9 h-9 bg-slate-900/80 text-white rounded-full hover:bg-rose-600 transition-all active:scale-95"
                       >
                         <MaterialIcon name="close" className="text-sm" />
                       </button>

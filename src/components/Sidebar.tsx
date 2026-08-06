@@ -219,7 +219,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       >
         <div className="p-4 overflow-y-auto flex-1">
           {/* Mobile Drawer Header */}
-          <div className="flex items-center justify-between -mx-4 -mt-4 px-4 py-4 mb-4 bg-gradient-to-r from-[#0F766E] to-[#0D9488] lg:hidden">
+          <div className="flex items-center justify-between -mx-4 -mt-4 px-4 py-4 mb-4 bg-gradient-to-r from-[#0F766E] to-[#0D9488] lg:hidden" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top, 0px))' }}>
             <div className="flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-white/15 backdrop-blur border border-white/25 text-white flex items-center justify-center shadow-sm">
                 <MaterialIcon name="eco" className="text-xl" />
@@ -233,7 +233,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <button
               onClick={onCloseMobile}
-              className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors"
+              className="flex items-center justify-center w-11 h-11 text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-colors active:scale-95"
               aria-label="Tutup menu"
             >
               <MaterialIcon name="close" className="text-xl" />
@@ -343,7 +343,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Footer info inside sidebar */}
-        <div className="p-4 border-t border-slate-100 text-center">
+        <div className="p-4 border-t border-slate-100 text-center" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}>
           <div className="flex items-center justify-center gap-2 text-[11px] font-bold text-slate-400">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>Role Active: {userRole.toUpperCase()}</span>
@@ -354,22 +354,35 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </aside>
 
       {/* Mobile Bottom Navigation Bar (Fixed bottom for mobile screens) */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1 flex items-center justify-around shadow-lg">
-        {navItems.slice(0, 5).map((item) => {
-          const isActive = activeTab === item.id;
-          return (
-            <button
-              key={item.id}
-              onClick={() => onTabChange(item.id)}
-              className={`flex flex-col items-center py-1.5 px-2 rounded-lg text-xs transition-colors ${
-                isActive ? 'text-[#0F766E] font-extrabold' : 'text-slate-500'
-              }`}
-            >
-              <MaterialIcon name={item.icon} className="text-xl" />
-              <span className="text-[9px] mt-0.5 max-w-[55px] truncate">{item.label.split(' ')[0]}</span>
-            </button>
-          );
-        })}
+      <div
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-lg"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      >
+        <div className="flex items-stretch justify-around px-1 pt-1">
+          {navItems.slice(0, 5).map((item) => {
+            const isActive = activeTab === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => onTabChange(item.id)}
+                aria-label={item.label}
+                className={`relative flex flex-col items-center justify-center py-1.5 px-2 rounded-xl transition-all tap-target-none active:scale-95 ${
+                  isActive ? 'text-[#0F766E] font-extrabold' : 'text-slate-500 hover:bg-slate-100'
+                }`}
+                style={{ minHeight: 48 }}
+              >
+                {isActive && (
+                  <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-[#0F766E]" />
+                )}
+                <MaterialIcon
+                  name={item.icon}
+                  className={`text-2xl ${isActive ? 'icon-filled' : ''}`}
+                />
+                <span className="text-[9px] mt-0.5 max-w-[60px] truncate">{item.label.split(' ')[0]}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </>
   );
