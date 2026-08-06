@@ -1,0 +1,6 @@
+{
+  "name": "EcoLake IoT Monitoring Platform",
+  "description": "Floating Treatment Wetland (FTW) Smart Dashboard for IoT water quality monitoring, real-time analytics, AI decision support, and multi-role access for KLH, IPB University, and Local Rangers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
