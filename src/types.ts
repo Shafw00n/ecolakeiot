@@ -127,6 +127,8 @@ export interface NotificationItem {
   actionableLink?: string;
 }
 
+export type ComplaintStatus = 'New' | 'In Progress' | 'Resolved';
+
 export interface PublicComplaint {
   id: string;
   reporterName: string;
@@ -136,7 +138,7 @@ export interface PublicComplaint {
   description: string;
   photoUrl?: string;
   timestamp: string;
-  status: 'Baru' | 'Diproses' | 'Selesai';
+  status: ComplaintStatus;
 }
 
 export interface AIDecision {

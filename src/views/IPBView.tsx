@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LaboratorySample, PlantSpeciesPerformance, PublicComplaint, WaterMetrics } from '../types';
+import { LaboratorySample, PlantSpeciesPerformance, PublicComplaint, WaterMetrics, ComplaintStatus } from '../types';
 import { PLANT_SPECIES_DATA } from '../data/mockData';
 import MaterialIcon from '../components/MaterialIcon';
 import PublicComplaintsList from '../components/PublicComplaintsList';
@@ -10,7 +10,7 @@ interface IPBViewProps {
   onAddSample: (sample: LaboratorySample) => void;
   onValidateSample: (id: string) => void;
   publicComplaints: PublicComplaint[];
-  onUpdateComplaintStatus: (id: string, status: 'Baru' | 'Diproses' | 'Selesai') => void;
+  onUpdateComplaintStatus: (id: string, status: ComplaintStatus) => void;
   onOpenPublicPortal?: () => void;
 }
 

@@ -49,8 +49,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onLogin }) => {
           <div className="absolute top-8 left-8 z-10">
             <div className="inline-flex items-center gap-2 bg-black/25 backdrop-blur-md px-4 py-2 rounded-full text-[11px] font-extrabold text-white border border-white/25 shadow-lg shadow-black/20">
               <MaterialIcon name="nature_people" className="text-base text-emerald-300" />
-              <span>Situ Gede Eco-Conservation</span>
-            </div>
+              <span>Situ Gede Eco-Conservation</span>            </div>
           </div>
 
           {/* Bottom Description Overlay */}
@@ -82,16 +81,14 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onLogin }) => {
           
           {/* Brand Header */}
           <div className="text-center mb-7">
-            <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0F766E] to-[#065f46] flex items-center justify-center text-white shadow-lg shadow-[#0F766E]/30 mx-auto mb-3 ring-4 ring-emerald-100">
-              <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
-              </svg>
+            <div className="relative w-16 h-16 rounded-2xl bg-white/90 flex items-center justify-center shadow-lg shadow-[#0F766E]/30 mx-auto mb-3 ring-4 ring-emerald-100 overflow-hidden">
+              <img src="/images/ftw_icon.png" alt="SMART-FTW" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-[26px] font-extrabold text-slate-900 tracking-tight uppercase">
-              EcoLake<span className="text-[#0F766E]">.IoT</span>
+              SMART<span className="text-[#0F766E]">-FTW</span>
             </h1>
             <p className="text-xs font-semibold text-slate-500 mt-1">
-              Situ Gede Floating Treatment Wetland (FTW) Smart Monitoring
+              IoT-Enabled Floating Treatment Wetland Monitoring System
             </p>
           </div>
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import MaterialIcon from './MaterialIcon';
-import { PublicComplaint, UserRole } from '../types';
+import { PublicComplaint, UserRole, ComplaintStatus } from '../types';
 
 interface PublicComplaintsListProps {
   complaints: PublicComplaint[];
   userRole: UserRole;
-  onUpdateStatus?: (id: string, newStatus: 'Baru' | 'Diproses' | 'Selesai') => void;
+  onUpdateStatus?: (id: string, newStatus: ComplaintStatus) => void;
   onOpenPublicPortal?: () => void;
 }
 
@@ -15,35 +15,35 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
   onUpdateStatus,
   onOpenPublicPortal,
 }) => {
-  const [filterStatus, setFilterStatus] = useState<'Semua' | 'Baru' | 'Diproses' | 'Selesai'>('Semua');
+  const [filterStatus, setFilterStatus] = useState<'All' | ComplaintStatus>('All');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const filteredComplaints = complaints.filter((c) => {
-    if (filterStatus === 'Semua') return true;
+    if (filterStatus === 'All') return true;
     return c.status === filterStatus;
   });
 
-  const getStatusBadge = (status: 'Baru' | 'Diproses' | 'Selesai') => {
+  const getStatusBadge = (status: ComplaintStatus) => {
     switch (status) {
-      case 'Baru':
+      case 'New':
         return (
           <span className="bg-sky-100 text-sky-800 border border-sky-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-            Baru
+            New
           </span>
         );
-      case 'Diproses':
+      case 'In Progress':
         return (
           <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-            Diproses
+            In Progress
           </span>
         );
-      case 'Selesai':
+      case 'Resolved':
         return (
           <span className="bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            Selesai
+            Resolved
           </span>
         );
     }
@@ -87,7 +87,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
       {/* Status Filter Tabs */}
       <div className="flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl overflow-x-auto max-w-full">
-          {(['Semua', 'Baru', 'Diproses', 'Selesai'] as const).map((st) => (
+          {(['All', 'New', 'In Progress', 'Resolved'] as const).map((st) => (
             <button
               key={st}
               onClick={() => setFilterStatus(st)}
@@ -99,7 +99,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
             >
               {st}{' '}
               <span className="text-[10px] opacity-70">
-                ({st === 'Semua' ? complaints.length : complaints.filter((c) => c.status === st).length})
+                ({st === 'All' ? complaints.length : complaints.filter((c) => c.status === st).length})
               </span>
             </button>
           ))}
@@ -122,9 +122,9 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
             <div
               key={c.id}
               className={`p-4 rounded-2xl border transition-all ${
-                c.status === 'Baru'
+                c.status === 'New'
                   ? 'bg-sky-50/40 border-sky-200/80 hover:border-sky-300'
-                  : c.status === 'Diproses'
+                  : c.status === 'In Progress'
                   ? 'bg-amber-50/40 border-amber-200/80'
                   : 'bg-slate-50 border-slate-200'
               }`}
@@ -174,23 +174,23 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
                 {/* Status Updater Buttons (especially for Ranger) */}
                 {onUpdateStatus && (
                   <div className="flex items-center gap-1.5 self-end sm:self-auto">
-                    {c.status === 'Baru' && (
+                    {c.status === 'New' && (
                       <button
-                        onClick={() => onUpdateStatus(c.id, 'Diproses')}
+                        onClick={() => onUpdateStatus(c.id, 'In Progress')}
                         className="px-3.5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1 active:scale-95"
                       >
                         <MaterialIcon name="engineering" className="text-sm" />
-                        <span>Proses Laporan</span>
+                        <span>Start Processing</span>
                       </button>
                     )}
 
-                    {c.status !== 'Selesai' && (
+                    {c.status !== 'Resolved' && (
                       <button
-                        onClick={() => onUpdateStatus(c.id, 'Selesai')}
+                        onClick={() => onUpdateStatus(c.id, 'Resolved')}
                         className="px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1 active:scale-95"
                       >
                         <MaterialIcon name="check_circle" className="text-sm" />
-                        <span>Tandai Selesai</span>
+                        <span>Mark Resolved</span>
                       </button>
                     )}
                   </div>

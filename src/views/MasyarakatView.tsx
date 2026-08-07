@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MaterialIcon from '../components/MaterialIcon';
-import { PublicComplaint } from '../types';
+import { PublicComplaint, ComplaintStatus } from '../types';
 
 interface MasyarakatViewProps {
   publicComplaints: PublicComplaint[];
@@ -69,7 +69,7 @@ export const MasyarakatView: React.FC<MasyarakatViewProps> = ({
       description: description.trim(),
       photoUrl: photoPreview || photoUrl || undefined,
       timestamp: timeString,
-      status: 'Baru',
+      status: 'New',
     };
 
     onSubmitComplaint(newComplaint);
@@ -88,27 +88,27 @@ export const MasyarakatView: React.FC<MasyarakatViewProps> = ({
     setIsSubmitted(false);
   };
 
-  const getStatusBadge = (status: 'Baru' | 'Diproses' | 'Selesai') => {
+  const getStatusBadge = (status: ComplaintStatus) => {
     switch (status) {
-      case 'Baru':
+      case 'New':
         return (
           <span className="bg-sky-100 text-sky-800 border border-sky-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-            Baru
+            New
           </span>
         );
-      case 'Diproses':
+      case 'In Progress':
         return (
           <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-            Diproses
+            In Progress
           </span>
         );
-      case 'Selesai':
+      case 'Resolved':
         return (
           <span className="bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            Selesai
+            Resolved
           </span>
         );
     }

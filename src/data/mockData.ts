@@ -34,7 +34,7 @@ export const MOCK_USERS: Record<string, User> = {
   ranger: {
     id: 'usr-rng-01',
     name: 'Ahmad Fauzi (Ranger-04)',
-    email: 'fauzi.ranger@ecolake.org',
+    email: 'fauzi.ranger@smartftw.org',
     role: 'ranger',
     title: 'Ketua Komunitas Situ Gede EcoRanger',
     organization: 'Komunitas Peduli Situ Gede Bogor',

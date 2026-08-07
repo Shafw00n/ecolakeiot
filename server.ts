@@ -36,7 +36,7 @@ app.post('/api/ai-diagnose', async (req, res) => {
     if (ai) {
       const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
-        contents: `Kamu adalah AI Environmental Specialist untuk danau Situ Gede (EcoLake IoT Platform).
+        contents: `Kamu adalah AI Environmental Specialist untuk danau Situ Gede (SMART-FTW Platform).
 Berdasarkan data sensor terkini:
 - pH: ${metrics?.pH}
 - Dissolved Oxygen (DO): ${metrics?.DO} mg/L
@@ -60,7 +60,7 @@ Berikan jawaban analisis yang ringkas, ilmiah, mendukung keputusan pemulihan air
   }
 
   // Smart fallback analysis if API is unavailable
-  let simulated = `[Analisis Sistem EcoLake]: Berdasarkan query "${query}" dan data sensor (pH ${metrics?.pH || 7.35}, DO ${metrics?.DO || 6.82} mg/L, Turbiditas ${metrics?.turbidity || 14.5} NTU):\n\n`;
+  let simulated = `[Analisis Sistem SMART-FTW]: Berdasarkan query "${query}" dan data sensor (pH ${metrics?.pH || 7.35}, DO ${metrics?.DO || 6.82} mg/L, Turbiditas ${metrics?.turbidity || 14.5} NTU):\n\n`;
   simulated += `Kondisi air Situ Gede tergolong sehat dan stabil. Penyerapan nitrat & fosfat oleh tanaman rakit hidroponik FTW (Vetiver, Cyperus, Canna) berjalan optimal sesuai baku mutu Kelas II.`;
   return res.json({ analysis: simulated });
 });
@@ -81,7 +81,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`EcoLake IoT Server running on http://localhost:${PORT}`);
+    console.log(`SMART-FTW Server running on http://localhost:${PORT}`);
   });
 }
 

@@ -39,7 +39,7 @@ export const AIAdvisorCard: React.FC<AIAdvisorCardProps> = ({ decisions, metrics
     } catch {
       // Smart simulation response generator
       setTimeout(() => {
-        let simulated = `[Analisis AI EcoLake]: Berdasarkan query "${userQuery}" dan parameter telemetri terkini (pH ${metrics.pH}, DO ${metrics.DO} mg/L, Turbiditas ${metrics.turbidity} NTU):\n\n`;
+        let simulated = `[Analisis AI SMART-FTW]: Berdasarkan query "${userQuery}" dan parameter telemetri terkini (pH ${metrics.pH}, DO ${metrics.DO} mg/L, Turbiditas ${metrics.turbidity} NTU):\n\n`;
         if (metrics.DO < 6.0) {
           simulated += `⚠️ Terdeteksi defisit Oksigen Terlarut (DO). Direkomendasikan menambah rotasi sirkulasi air pada FTW Unit 02 dan membatasi masukan limbah organik dari pemukiman warga terdekat.`;
         } else if (metrics.turbidity > 20) {

@@ -34,11 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`sticky top-0 z-30 transition-all shadow-md ${
-        isMasyarakat
-          ? 'bg-gradient-to-r from-[#0F766E] via-[#0D9488] to-[#38BDF8] text-white border-b border-sky-300/40'
-          : 'bg-white border-b border-slate-200 text-slate-900 shadow-xs'
-      } px-4 lg:px-8 py-3.5`}
+      className="sticky top-0 z-30 transition-all shadow-xs bg-white border-b border-slate-200 text-slate-900 px-4 lg:px-8 py-3.5"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         
@@ -58,30 +54,24 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.location.reload()}>
             <div
-              className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-sm ${
+              className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-sm overflow-hidden ${
                 isMasyarakat
-                  ? 'bg-gradient-to-br from-sky-300 to-emerald-400 text-slate-950 font-black'
-                  : 'bg-gradient-to-br from-[#0F766E] to-[#0284C7] text-white'
+                  ? 'bg-gradient-to-br from-sky-300 to-emerald-400'
+                  : 'bg-gradient-to-br from-[#0F766E] to-[#0284C7]'
               }`}
             >
-              {isMasyarakat ? (
-                <MaterialIcon name="record_voice_over" className="text-2xl" />
-              ) : (
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
-                </svg>
-              )}
+              <img src="/images/ftw_icon.png" alt="SMART-FTW" className="w-full h-full object-contain" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold tracking-tight text-xl uppercase leading-tight">
                   {isMasyarakat ? (
                     <>
-                      EcoLake<span className="text-sky-300">.Warga</span>
+                      SMART<span className="text-[#0F766E]">.Warga</span>
                     </>
                   ) : (
                     <>
-                      EcoLake<span className="text-sky-600">.IoT</span>
+                      SMART<span className="text-sky-600">-FTW</span>
                     </>
                   )}
                 </span>
@@ -89,10 +79,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   Lake IoT
                 </span>
               </div>
-              <p className={`text-xs hidden sm:block ${isMasyarakat ? 'text-sky-100/90' : 'text-slate-500'}`}>
+              <p className="text-xs hidden sm:block text-slate-500">
                 {isMasyarakat
                   ? 'Layanan Pengaduan & Aspirasi Masyarakat Situ Gede'
-                  : 'Situ Gede Smart Water Quality Monitoring'}
+                  : 'Floating Treatment Wetland Monitoring System'}
               </p>
             </div>
           </div>
@@ -176,7 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {isMasyarakat ? (
             <button
               onClick={() => onLogout()}
-              className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-emerald-50 text-xs font-semibold border border-white/25 transition-all shadow-xs active:scale-95"
+              className="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-semibold border border-rose-200 transition-all shadow-xs active:scale-95"
               style={{ minHeight: 48 }}
               title="Kembali ke halaman login"
             >

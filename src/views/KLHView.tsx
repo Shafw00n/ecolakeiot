@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LakeComparisonData, PublicComplaint, WaterMetrics } from '../types';
+import { LakeComparisonData, PublicComplaint, WaterMetrics, ComplaintStatus } from '../types';
 import MaterialIcon from '../components/MaterialIcon';
 import PublicComplaintsList from '../components/PublicComplaintsList';
 
@@ -7,7 +7,7 @@ interface KLHViewProps {
   lakes: LakeComparisonData[];
   metrics: WaterMetrics;
   publicComplaints: PublicComplaint[];
-  onUpdateComplaintStatus: (id: string, status: 'Baru' | 'Diproses' | 'Selesai') => void;
+  onUpdateComplaintStatus: (id: string, status: ComplaintStatus) => void;
   onOpenPublicPortal?: () => void;
 }
 

@@ -5,7 +5,6 @@ import MaterialIcon from './MaterialIcon';
 export type ActiveTab =
   | 'monitoring'
   | 'klh_executive'
-  | 'klh_lakes'
   | 'klh_ai_policy'
   | 'ipb_lab'
   | 'ipb_wetland'
@@ -57,15 +56,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         sharedMonitoring,
         {
           id: 'klh_executive' as ActiveTab,
-          label: 'Ringkasan Eksekutif WQI',
+          label: 'Ringkasan Eksekutif & Komparasi',
           icon: 'analytics',
-          description: 'Indeks WQI & Baku Mutu Kelas II',
-        },
-        {
-          id: 'klh_lakes' as ActiveTab,
-          label: 'Komparasi & Baku Mutu',
-          icon: 'compare_arrows',
-          description: 'Situ Gede vs Sunter & Maninjau',
+          description: 'Indeks WQI, Baku Mutu & Antar-Danau',
         },
         {
           id: 'database' as ActiveTab,
@@ -87,15 +80,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         sharedMonitoring,
         {
           id: 'ipb_lab' as ActiveTab,
-          label: 'Sampel Laboratorium',
+          label: 'Lab & Bio-Filtrasi',
           icon: 'science',
-          description: 'Validasi Sampel Air & Kimia',
-        },
-        {
-          id: 'ipb_wetland' as ActiveTab,
-          label: 'Serapan Bio-Filtrasi',
-          icon: 'grass',
-          description: 'Kinerja Vetiver, Canna, Typha',
+          description: 'Validasi Sampel Air & Kinerja Vetiver, Canna, Typha',
         },
         {
           id: 'database' as ActiveTab,
@@ -129,21 +116,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
       sharedMonitoring,
       {
         id: 'ranger_checklist' as ActiveTab,
-        label: 'Checklist Patroli Harian',
+        label: 'Patroli & Laporan',
         icon: 'checklist',
-        description: 'Pemeriksaan Unit FTW Lapangan',
-      },
-      {
-        id: 'ranger_reports' as ActiveTab,
-        label: 'Input Laporan Lapangan',
-        icon: 'report',
-        description: 'Form Insiden & Masalah Fisik Air',
-      },
-      {
-        id: 'community' as ActiveTab,
-        label: 'Daftar Aduan Masyarakat',
-        icon: 'mark_email_unread',
-        description: 'Laporan Masuk dari Warga (Prioritas)',
+        description: 'Checklist, Insiden & Aduan Masyarakat',
       },
       {
         id: 'database' as ActiveTab,
@@ -225,9 +200,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <MaterialIcon name="eco" className="text-xl" />
               </div>
               <div>
-                <span className="block font-extrabold text-white text-base leading-tight">EcoLake IoT</span>
+                <span className="block font-extrabold text-white text-base leading-tight">SMART-FTW</span>
                 <span className="block text-[9px] text-emerald-100/90 font-bold uppercase tracking-wider">
-                  Situ Gede Smart Monitoring
+                  Floating Treatment Wetland Monitoring
                 </span>
               </div>
             </div>
