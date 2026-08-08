@@ -9,7 +9,7 @@ interface LakeMapProps {
     DO: number;
     turbidity: number;
     temperature: number;
-    conductivity: number;
+    tds: number;
     status: string;
   };
   onSelectUnit?: (unit: FTWUnit) => void;
@@ -253,8 +253,8 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
                 <span className="font-bold text-slate-800">{metrics ? metrics.turbidity : 18} NTU</span>
               </div>
               <div className="p-1.5 bg-slate-50 rounded-xl">
-                <span className="text-[10px] text-slate-400 block font-semibold">EC / TDS</span>
-                <span className="font-bold text-slate-800">{metrics ? (metrics.conductivity / 1000).toFixed(2) : '0.45'} mS/cm</span>
+                <span className="text-[10px] text-slate-400 block font-semibold">TDS</span>
+                <span className="font-bold text-slate-800">{metrics ? metrics.tds.toFixed(0) : '320'} mg/L</span>
               </div>
               <div className="p-1.5 bg-emerald-50 rounded-xl">
                 <span className="text-[10px] text-emerald-600 block font-semibold">Baterai IoT</span>

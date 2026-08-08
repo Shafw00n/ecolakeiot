@@ -6,7 +6,7 @@ export interface HistoryPoint {
   DO: number;
   temperature: number;
   turbidity: number;
-  conductivity: number;
+  tds: number;
   nitrate: number;
   phosphate: number;
 }
@@ -21,7 +21,7 @@ const PARAM_RANGES: Record<
   DO: { base: 6.4, amp: 0.9, min: 3.5 },
   temperature: { base: 26, amp: 1.8, min: 22 },
   turbidity: { base: 16, amp: 5, min: 8 },
-  conductivity: { base: 245, amp: 28, min: 200 },
+  tds: { base: 320, amp: 40, min: 280 },
   nitrate: { base: 1.2, amp: 0.3, min: 0.8 },
   phosphate: { base: 0.18, amp: 0.06, min: 0.1 },
 };
@@ -47,8 +47,8 @@ export const buildHistory = (timeframe: Timeframe): HistoryPoint[] => {
       turbidity: parseFloat(
         (PARAM_RANGES.turbidity.base + Math.sin(idx * 1.1) * 2.4).toFixed(1)
       ),
-      conductivity: parseFloat(
-        (PARAM_RANGES.conductivity.base + Math.sin(idx * 0.6) * 20).toFixed(0)
+      tds: parseFloat(
+        (PARAM_RANGES.tds.base + Math.sin(idx * 0.6) * 20).toFixed(0)
       ),
       nitrate: parseFloat((PARAM_RANGES.nitrate.base + t * 0.2).toFixed(2)),
       phosphate: parseFloat((PARAM_RANGES.phosphate.base + t * 0.04).toFixed(2)),
@@ -71,5 +71,5 @@ export const TERELMETRY_PARAMS: {
   { key: 'DO', label: 'Dissolved Oxygen', unit: 'mg/L', icon: 'air', color: 'text-teal-700', bg: 'bg-teal-50 border-teal-200', bar: '#0d9488', is: '' },
   { key: 'temperature', label: 'Water Temperature', unit: '°C', icon: 'thermostat', color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-200', bar: '#059669', is: '' },
   { key: 'turbidity', label: 'Turbidity', unit: 'NTU', icon: 'blur_on', color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200', bar: '#d97706', is: '' },
-  { key: 'conductivity', label: 'EC / TDS', unit: 'µS/cm', icon: 'electric_bolt', color: 'text-cyan-700', bg: 'bg-cyan-50 border-cyan-200', bar: '#0891b2', is: '' },
+  { key: 'tds', label: 'Total Dissolved Solids', unit: 'mg/L', icon: 'electric_bolt', color: 'text-cyan-700', bg: 'bg-cyan-50 border-cyan-200', bar: '#0891b2', is: '' },
 ];

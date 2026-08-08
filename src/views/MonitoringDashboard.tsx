@@ -20,7 +20,7 @@ const TrendModal: React.FC<TrendModalProps> = ({ paramKey, onClose }) => {
     DO: 'DO',
     temperature: 'temperature',
     turbidity: 'turbidity',
-    conductivity: 'conductivity',
+    tds: 'tds',
   };
   const chartKey = metricToKey[paramKey] as string;
 
@@ -171,7 +171,7 @@ const MonitoringDashboard: React.FC = () => {
     { key: 'DO', label: 'Dissolved Oxygen', value: waterMetrics.DO.toFixed(2), unit: 'mg/L', icon: 'air', color: 'bg-teal-100 text-teal-700' },
     { key: 'temperature', label: 'Water Temperature', value: waterMetrics.temperature.toFixed(1), unit: '°C', icon: 'thermostat', color: 'bg-emerald-100 text-emerald-700' },
     { key: 'turbidity', label: 'Turbidity', value: waterMetrics.turbidity.toFixed(1), unit: 'NTU', icon: 'blur_on', color: 'bg-amber-100 text-amber-700' },
-    { key: 'conductivity', label: 'EC / TDS', value: (waterMetrics.conductivity / 1000).toFixed(2), unit: 'mS/cm', icon: 'electric_bolt', color: 'bg-cyan-100 text-cyan-700' },
+    { key: 'tds', label: 'Total Dissolved Solids', value: waterMetrics.tds.toFixed(0), unit: 'mg/L', icon: 'electric_bolt', color: 'bg-cyan-100 text-cyan-700' },
   ];
 
   return (

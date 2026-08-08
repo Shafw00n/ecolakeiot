@@ -113,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
                 }`}
               >
-                Normal
+                Aman
               </button>
               <button
                 onClick={() => onSimulationModeChange('Warning')}
@@ -123,7 +123,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
                 }`}
               >
-                Peringatan
+                Waspada
               </button>
               <button
                 onClick={() => onSimulationModeChange('Critical')}
@@ -133,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     : 'text-slate-600 hover:text-slate-900 active:bg-slate-200'
                 }`}
               >
-                Kritis
+                Bahaya
               </button>
             </div>
           </div>

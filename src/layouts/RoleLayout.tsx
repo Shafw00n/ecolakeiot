@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { UserRole } from '../types';
 
@@ -15,6 +15,7 @@ import NotificationDrawer from '../components/NotificationDrawer';
 import FTWDiagramModal from '../components/FTWDiagramModal';
 import QRScannerModal from '../components/QRScannerModal';
 import PublicComplaintPortalModal from '../components/PublicComplaintPortalModal';
+import CriticalAlertModal from '../components/CriticalAlertModal';
 import MaterialIcon from '../components/MaterialIcon';
 
 interface RoleLayoutProps {
@@ -35,6 +36,7 @@ export const RoleLayout: React.FC<RoleLayoutProps> = ({ role }) => {
     logout,
     simulationMode,
     setSimulationMode,
+    waterMetrics,
     unreadCount,
     notifications,
     ftwUnits,
@@ -57,6 +59,16 @@ export const RoleLayout: React.FC<RoleLayoutProps> = ({ role }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<ActiveTab>('monitoring');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCriticalAlertShown, setIsCriticalAlertShown] = useState(false);
+
+  useEffect(() => {
+    if (simulationMode === 'Critical' && !isCriticalAlertShown) {
+      setIsCriticalAlertShown(true);
+    }
+    if (simulationMode !== 'Critical') {
+      setIsCriticalAlertShown(false);
+    }
+  }, [simulationMode]);
 
   const handleRoleChange = (r: UserRole) => {
     login(r);
@@ -133,6 +145,12 @@ export const RoleLayout: React.FC<RoleLayoutProps> = ({ role }) => {
         onClose={() => setIsPublicPortalOpen(false)}
         defaultLocation={publicPortalDefaultLocation}
         onSubmitComplaint={handleAddPublicComplaint}
+      />
+      {/* Critical Alert */}
+      <CriticalAlertModal
+        isOpen={isCriticalAlertShown}
+        onClose={() => setIsCriticalAlertShown(false)}
+        metrics={waterMetrics}
       />
     </div>
   );

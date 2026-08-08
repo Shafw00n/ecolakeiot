@@ -18,6 +18,7 @@ export interface WaterMetrics {
   DO: number; // Dissolved Oxygen (mg/L)
   turbidity: number; // NTU
   temperature: number; // °C
+  tds: number; // mg/L
   conductivity: number; // µS/cm
   nitrate: number; // mg/L
   phosphate: number; // mg/L

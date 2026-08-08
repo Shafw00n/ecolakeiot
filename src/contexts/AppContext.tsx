@@ -163,26 +163,34 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     const timer = setInterval(() => {
       setWaterMetrics((prev) => {
-        let basePh = 7.35;
-        let baseDo = 6.82;
-        let baseTurb = 14.5;
+        let basePh = 7.2;
+        let baseDo = 6.5;
+        let baseTemp = 27.0;
+        let baseTurb = 12.0;
+        let baseTds = 320;
         let statusTag: WaterMetrics['status'] = 'Good';
 
         if (simulationMode === 'Warning') {
-          basePh = 6.95;
-          baseDo = 5.75;
-          baseTurb = 23.5;
+          basePh = 8.2;
+          baseDo = 3.5;
+          baseTemp = 31.5;
+          baseTurb = 45.0;
+          baseTds = 410;
           statusTag = 'Moderate';
         } else if (simulationMode === 'Critical') {
-          basePh = 6.4;
-          baseDo = 3.9;
-          baseTurb = 38.0;
+          basePh = 5.2;
+          baseDo = 1.8;
+          baseTemp = 26.5;
+          baseTurb = 85.0;
+          baseTds = 1250;
           statusTag = 'Poor';
         }
 
         const phNoise = Math.random() * 0.1 - 0.05;
         const doNoise = Math.random() * 0.15 - 0.07;
+        const tempNoise = Math.random() * 0.2 - 0.1;
         const turbNoise = Math.random() * 0.8 - 0.4;
+        const tdsNoise = Math.round(Math.random() * 8 - 4);
 
         let score = 88.5;
         if (simulationMode === 'Warning') score = 68.4;
@@ -192,7 +200,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           ...prev,
           pH: parseFloat((basePh + phNoise).toFixed(2)),
           DO: parseFloat((baseDo + doNoise).toFixed(2)),
+          temperature: parseFloat((baseTemp + tempNoise).toFixed(1)),
           turbidity: parseFloat((baseTurb + turbNoise).toFixed(1)),
+          tds: baseTds + tdsNoise,
           wqiScore: score,
           status: statusTag,
           timestamp: new Date().toLocaleTimeString('id-ID', {

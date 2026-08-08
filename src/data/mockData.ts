@@ -52,11 +52,12 @@ export const MOCK_USERS: Record<string, User> = {
 };
 
 export const INITIAL_WATER_METRICS: WaterMetrics = {
-  pH: 7.35,
-  DO: 6.82, // mg/L
-  turbidity: 14.5, // NTU
-  temperature: 26.4, // °C
-  conductivity: 245.0, // µS/cm
+  pH: 7.2,
+  DO: 6.5, // mg/L
+  turbidity: 12.0, // NTU
+  temperature: 27.0, // °C
+  tds: 320, // mg/L
+  conductivity: 320.0, // µS/cm
   nitrate: 1.28, // mg/L
   phosphate: 0.18, // mg/L
   wqiScore: 88.5,
