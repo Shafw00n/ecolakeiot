@@ -59,16 +59,15 @@ export const RoleLayout: React.FC<RoleLayoutProps> = ({ role }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<ActiveTab>('monitoring');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCriticalAlertShown, setIsCriticalAlertShown] = useState(false);
+  const [criticalAlertDismissed, setCriticalAlertDismissed] = useState(false);
 
   useEffect(() => {
-    if (simulationMode === 'Critical' && !isCriticalAlertShown) {
-      setIsCriticalAlertShown(true);
-    }
-    if (simulationMode !== 'Critical') {
-      setIsCriticalAlertShown(false);
-    }
+    setCriticalAlertDismissed(false);
   }, [simulationMode]);
+
+  useEffect(() => {
+    setCriticalAlertDismissed(false);
+  }, [activeTab]);
 
   const handleRoleChange = (r: UserRole) => {
     login(r);
@@ -148,8 +147,8 @@ export const RoleLayout: React.FC<RoleLayoutProps> = ({ role }) => {
       />
       {/* Critical Alert */}
       <CriticalAlertModal
-        isOpen={isCriticalAlertShown}
-        onClose={() => setIsCriticalAlertShown(false)}
+        isOpen={simulationMode === 'Critical' && !criticalAlertDismissed}
+        onClose={() => setCriticalAlertDismissed(true)}
         metrics={waterMetrics}
       />
     </div>
