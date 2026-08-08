@@ -216,6 +216,89 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => clearInterval(timer);
   }, [simulationMode]);
 
+  // Generate parameter-based water alerts whenever the simulation mode changes
+  useEffect(() => {
+    const alertsByMode: Record<
+      MetricStatus,
+      { title: string; message: string; severity: 'critical' | 'warning' }[]
+    > = {
+      Good: [],
+      Warning: [
+        {
+          title: 'Warning: pH mendekati batas atas',
+          message: 'pH mencapai 8.2 (ambang optimal maks 8.0). Berpotensi basa akibat aktivitas alga.',
+          severity: 'warning',
+        },
+        {
+          title: 'Warning: Oksigen Terlarut (DO) di bawah level optimal',
+          message: 'DO turun ke 3.5 mg/L (optimal ≥ 6.0 mg/L). Indikasi awal eutrofikasi.',
+          severity: 'warning',
+        },
+        {
+          title: 'Warning: Suhu air di atas rentang normal',
+          message: 'Suhu tercatat 31.5°C (rentang optimal 25–31°C). Mempercepat pertumbuhan alga.',
+          severity: 'warning',
+        },
+        {
+          title: 'Warning: Kekeruhan meningkat',
+          message: 'Kekeruhan naik ke 45 NTU (batas optimal ≤ 25 NTU). Sedimen tersuspensi tinggi.',
+          severity: 'warning',
+        },
+        {
+          title: 'Warning: TDS meningkat',
+          message: 'Total Padatan Terlarut (TDS) naik ke 410 mg/L (batas optimal ≤ 340 mg/L).',
+          severity: 'warning',
+        },
+      ],
+      Critical: [
+        {
+          title: 'Critical: pH di luar rentang aman',
+          message: 'pH turun drastis ke 5.2 (asam). Di luar rentang aman 6.5–8.5.',
+          severity: 'critical',
+        },
+        {
+          title: 'Critical: Oksigen Terlarut (DO) sangat rendah',
+          message: 'DO kritis 1.8 mg/L. Risiko kematian massal biota akibat anoksia.',
+          severity: 'critical',
+        },
+        {
+          title: 'Critical: Kekeruhan melampaui batas aman',
+          message: 'Kekeruhan mencapai 85 NTU. Air sangat keruh, fotosintesis terhambat.',
+          severity: 'critical',
+        },
+        {
+          title: 'Critical: TDS sangat tinggi',
+          message: 'TDS melonjak ke 1250 mg/L. Indikasi pencemaran limbah industri/domestik berat.',
+          severity: 'critical',
+        },
+      ],
+    };
+
+    const alertsForMode = alertsByMode[simulationMode];
+    if (simulationMode !== 'Good') {
+      setNotifications((prev) => {
+        const existingSimAlertIds = prev
+          .filter((n) => n.id.startsWith('sim-'))
+          .map((n) => n.id);
+        const newAlerts: NotificationItem[] = alertsForMode.map((a, idx) => ({
+          id: `sim-${Date.now()}-${idx}`,
+          title: a.title,
+          message: a.message,
+          type: 'water_alert',
+          timestamp: 'Baru saja',
+          read: false,
+          severity: a.severity,
+        }));
+        const kept = prev.filter((n) => !n.id.startsWith('sim-'));
+        return [...newAlerts, ...kept];
+      });
+    } else {
+      setNotifications((prev) =>
+        prev.filter((n) => !n.id.startsWith('sim-') && n.id !== 'notif-01')
+      );
+    }
+  }, [simulationMode]);
+
   const handleAddPublicComplaint = useCallback(
     (complaint: PublicComplaint) => {
       setPublicComplaints((prev) => [complaint, ...prev]);

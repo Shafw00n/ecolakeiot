@@ -1,4 +1,4 @@
-import { WaterMetrics } from '../types';
+import { MetricStatus } from '../types';
 
 export interface HistoryPoint {
   time: string;
@@ -13,17 +13,33 @@ export interface HistoryPoint {
 
 export type Timeframe = '24h' | '7d' | '30d';
 
-const PARAM_RANGES: Record<
-  string,
-  { base: number; amp: number; min: number }
-> = {
-  pH: { base: 7.2, amp: 0.35, min: 6.5 },
-  DO: { base: 6.4, amp: 0.9, min: 3.5 },
-  temperature: { base: 26, amp: 1.8, min: 22 },
-  turbidity: { base: 16, amp: 5, min: 8 },
-  tds: { base: 320, amp: 40, min: 280 },
-  nitrate: { base: 1.2, amp: 0.3, min: 0.8 },
-  phosphate: { base: 0.18, amp: 0.06, min: 0.1 },
+interface ModeRange {
+  base: number;
+  amp: number;
+}
+
+const MODE_CONFIG: Record<MetricStatus, { pH: ModeRange; DO: ModeRange; temperature: ModeRange; turbidity: ModeRange; tds: ModeRange }> = {
+  Good: {
+    pH: { base: 7.2, amp: 0.35 },
+    DO: { base: 6.4, amp: 0.5 },
+    temperature: { base: 27, amp: 1.2 },
+    turbidity: { base: 13, amp: 3 },
+    tds: { base: 320, amp: 25 },
+  },
+  Warning: {
+    pH: { base: 8.2, amp: 0.4 },
+    DO: { base: 3.6, amp: 0.8 },
+    temperature: { base: 31.2, amp: 1.5 },
+    turbidity: { base: 44, amp: 8 },
+    tds: { base: 410, amp: 40 },
+  },
+  Critical: {
+    pH: { base: 5.2, amp: 0.5 },
+    DO: { base: 1.8, amp: 0.6 },
+    temperature: { base: 26.5, amp: 2.5 },
+    turbidity: { base: 84, amp: 12 },
+    tds: { base: 1250, amp: 120 },
+  },
 };
 
 const HOUR_LABELS: Record<Timeframe, string[]> = {
@@ -32,26 +48,21 @@ const HOUR_LABELS: Record<Timeframe, string[]> = {
   '30d': ['M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7'],
 };
 
-export const buildHistory = (timeframe: Timeframe): HistoryPoint[] => {
+export const buildHistory = (timeframe: Timeframe, mode: MetricStatus = 'Good'): HistoryPoint[] => {
   const count = timeframe === '24h' ? 24 : timeframe === '7d' ? 7 : 30;
   const labels = HOUR_LABELS[timeframe];
+  const cfg = MODE_CONFIG[mode];
   return Array.from({ length: count }).map((_, idx) => {
     const t = Math.sin(idx * 0.7) * 0.5 + Math.random() * 0.4;
     const points: HistoryPoint = {
       time: labels[idx % labels.length],
-      pH: parseFloat((PARAM_RANGES.pH.base + t * PARAM_RANGES.pH.amp).toFixed(2)),
-      DO: parseFloat((PARAM_RANGES.DO.base + Math.cos(idx * 0.5) * PARAM_RANGES.DO.amp).toFixed(2)),
-      temperature: parseFloat(
-        (PARAM_RANGES.temperature.base + Math.sin(idx * 0.4) * 1.4).toFixed(1)
-      ),
-      turbidity: parseFloat(
-        (PARAM_RANGES.turbidity.base + Math.sin(idx * 1.1) * 2.4).toFixed(1)
-      ),
-      tds: parseFloat(
-        (PARAM_RANGES.tds.base + Math.sin(idx * 0.6) * 20).toFixed(0)
-      ),
-      nitrate: parseFloat((PARAM_RANGES.nitrate.base + t * 0.2).toFixed(2)),
-      phosphate: parseFloat((PARAM_RANGES.phosphate.base + t * 0.04).toFixed(2)),
+      pH: parseFloat((cfg.pH.base + t * cfg.pH.amp).toFixed(2)),
+      DO: parseFloat((cfg.DO.base + Math.cos(idx * 0.5) * cfg.DO.amp).toFixed(2)),
+      temperature: parseFloat((cfg.temperature.base + Math.sin(idx * 0.4) * 1.2).toFixed(1)),
+      turbidity: parseFloat((cfg.turbidity.base + Math.sin(idx * 1.1) * (cfg.turbidity.amp / 2)).toFixed(1)),
+      tds: parseFloat((cfg.tds.base + Math.sin(idx * 0.6) * (cfg.tds.amp / 2)).toFixed(0)),
+      nitrate: parseFloat((1.2 + t * 0.2).toFixed(2)),
+      phosphate: parseFloat((0.18 + t * 0.04).toFixed(2)),
     };
     return points;
   });

@@ -4,16 +4,19 @@ import MaterialIcon from '../components/MaterialIcon';
 import LakeMap from '../components/LakeMap';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { buildHistory, Timeframe, HistoryPoint, TERELMETRY_PARAMS } from '../data/history';
+import { MetricStatus } from '../types';
+import { PARAM_THRESHOLDS, STATUS_STYLE, ParamThresholdStatus } from '../data/thresholds';
 
 interface TrendModalProps {
   paramKey: string;
+  mode: MetricStatus;
   onClose: () => void;
 }
 
-const TrendModal: React.FC<TrendModalProps> = ({ paramKey, onClose }) => {
+const TrendModal: React.FC<TrendModalProps> = ({ paramKey, mode, onClose }) => {
   const [timeframe, setTimeframe] = useState<Timeframe>('24h');
   const param = TERELMETRY_PARAMS.find((p) => p.key === paramKey) || TERELMETRY_PARAMS[0];
-  const data = useMemo(() => buildHistory(timeframe), [timeframe]);
+  const data = useMemo(() => buildHistory(timeframe, mode), [timeframe, mode]);
 
   const metricToKey: Record<string, keyof HistoryPoint> = {
     pH: 'pH',
@@ -167,18 +170,45 @@ const MonitoringDashboard: React.FC = () => {
   const status = getOverallStatus();
 
   // 5 parameter cards with click -> trend modal
-  const params = [
-    { key: 'pH', label: 'pH (Keasaman)', value: waterMetrics.pH.toFixed(2), unit: '', icon: 'water_drop', color: 'bg-sky-100 text-sky-700' },
-    { key: 'DO', label: 'Oksigen Terlarut (DO)', value: waterMetrics.DO.toFixed(2), unit: 'mg/L', icon: 'air', color: 'bg-teal-100 text-teal-700' },
-    { key: 'temperature', label: 'Suhu Air', value: waterMetrics.temperature.toFixed(1), unit: '°C', icon: 'thermostat', color: 'bg-emerald-100 text-emerald-700' },
-    { key: 'turbidity', label: 'Kekeruhan (Turbidity)', value: waterMetrics.turbidity.toFixed(1), unit: 'NTU', icon: 'blur_on', color: 'bg-amber-100 text-amber-700' },
-    { key: 'tds', label: 'Total Padatan Terlarut (TDS)', value: waterMetrics.tds.toFixed(0), unit: 'mg/L', icon: 'electric_bolt', color: 'bg-cyan-100 text-cyan-700' },
-  ];
+  const paramValues: Record<string, number> = {
+    pH: waterMetrics.pH,
+    DO: waterMetrics.DO,
+    temperature: waterMetrics.temperature,
+    turbidity: waterMetrics.turbidity,
+    tds: waterMetrics.tds,
+  };
+
+  const params = PARAM_THRESHOLDS.map((th) => {
+    const value = paramValues[th.key];
+    const modeStatus: ParamThresholdStatus =
+      simulationMode === 'Critical'
+        ? 'critical'
+        : simulationMode === 'Warning'
+        ? 'warning'
+        : 'good';
+    const decimals = th.key === 'pH' || th.key === 'DO' ? 2 : th.key === 'tds' ? 0 : 1;
+    return {
+      key: th.key,
+      label: th.label,
+      value: value.toFixed(decimals),
+      unit: th.unit,
+      icon: th.icon,
+      status: modeStatus,
+      style: STATUS_STYLE[modeStatus],
+      optimalRange: th.optimalRange,
+    };
+  });
 
   return (
     <div className="space-y-6">
       {/* Header hero */}
-      <div className="bg-[#0F766E] text-white rounded-2xl p-6 sm:p-7 shadow-md relative overflow-hidden">
+      <div className={`text-white rounded-2xl p-6 sm:p-7 shadow-md relative overflow-hidden transition-colors ${
+        simulationMode === 'Critical'
+          ? 'bg-gradient-to-r from-rose-950 via-rose-800 to-rose-600'
+          : simulationMode === 'Warning'
+          ? 'bg-gradient-to-r from-amber-900 via-amber-700 to-amber-500'
+          : 'bg-[#0F766E]'
+      }`}>
         <div className="absolute -right-8 -bottom-8 opacity-10 pointer-events-none text-white">
           <svg className="w-80 h-80" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
@@ -186,31 +216,73 @@ const MonitoringDashboard: React.FC = () => {
         </div>
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="bg-emerald-900/60 text-emerald-200 border border-emerald-400/30 text-xs font-bold px-3 py-1 rounded-xl flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                Telemetri Sensor Real-time
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <span className={`text-xs font-bold px-3 py-1 rounded-xl flex items-center gap-2 border ${
+                simulationMode === 'Critical'
+                  ? 'bg-white/15 text-rose-100 border-rose-200/40'
+                  : simulationMode === 'Warning'
+                  ? 'bg-white/15 text-amber-100 border-amber-200/40'
+                  : 'bg-emerald-900/60 text-emerald-200 border-emerald-400/30'
+              }`}>
+                <span className={`w-2 h-2 rounded-full ${
+                  simulationMode === 'Critical' ? 'bg-rose-300 animate-ping' : 'bg-emerald-400 animate-ping'
+                }`} />
+                {simulationMode === 'Critical'
+                  ? 'DARURAT - Kualitas Air Bahaya'
+                  : simulationMode === 'Warning'
+                  ? 'Peringatan - Kualitas Air Waspada'
+                  : 'Telemetri Sensor Real-time'}
               </span>
-              <span className="text-emerald-100/80 text-xs hidden sm:inline font-medium">
+              <span className="text-white/80 text-xs hidden sm:inline font-medium">
                 • Terakhir diperbarui: {waterMetrics.timestamp}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Monitoring Kualitas Air Danau Situ Gede
             </h1>
-            <p className="text-emerald-50 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
+            <p className="text-white/80 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
               Floating Treatment Wetland (FTW) terintegrasi dengan sensor IoT real-time, peringatan otomatis, dan analisis kualitas air.
             </p>
           </div>
           <button
             onClick={() => setIsFTWDiagramOpen(true)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl border border-white/20 backdrop-blur-xs shadow-xs active:scale-95 self-start md:self-auto"
+            className={`flex items-center gap-2 px-4 py-2.5 text-white text-xs font-bold rounded-xl border backdrop-blur-xs shadow-xs active:scale-95 self-start md:self-auto ${
+              simulationMode === 'Critical'
+                ? 'bg-white/15 hover:bg-white/25 border-white/20'
+                : simulationMode === 'Warning'
+                ? 'bg-white/15 hover:bg-white/25 border-white/20'
+                : 'bg-white/10 hover:bg-white/20 border-white/20'
+            }`}
           >
             <MaterialIcon name="schema" className="text-emerald-300 text-base" />
             <span>Infografis Arsitektur FTW</span>
           </button>
         </div>
       </div>
+
+      {/* Status Banner */}
+      {simulationMode === 'Warning' && (
+        <div className="flex items-start gap-3 p-4 rounded-2xl border border-amber-200 bg-amber-50 shadow-xs animate-in fade-in slide-in-from-top-2">
+          <span className="p-2 rounded-xl bg-amber-100 text-amber-700 shrink-0">
+            <MaterialIcon name="warning" className="text-lg" />
+          </span>
+          <div className="text-xs text-amber-800 leading-relaxed space-y-1">
+            <p className="font-extrabold text-amber-900">Peringatan Kualitas Air - Status: WASPADA</p>
+            <p>Terjadi deviasi pada beberapa parameter (pH, DO, Suhu, Kekeruhan, TDS). Dilakukan inspeksi lapangan oleh tim Ranger dan analisis lanjutan oleh KLH & IPB.</p>
+          </div>
+        </div>
+      )}
+      {simulationMode === 'Critical' && (
+        <div className="flex items-start gap-3 p-4 rounded-2xl border border-rose-200 bg-rose-50 shadow-md animate-in slide-in-from-top-2">
+          <span className="p-2 rounded-xl bg-rose-100 text-rose-600 shrink-0 animate-pulse">
+            <MaterialIcon name="emergency" className="text-lg" />
+          </span>
+          <div className="text-xs text-rose-800 leading-relaxed space-y-1">
+            <p className="font-extrabold text-rose-900">ALARM DARURAT - Kualitas Air: BAHAYA</p>
+            <p>Parameter kritis terdeteksi (pH asam, DO sangat rendah, kekeruhan & TDS ekstrem). Notifikasi darurat telah dikirim ke KLH & pemangku kepentingan. Diperlukan mitigasi segera.</p>
+          </div>
+        </div>
+      )}
 
       {/* Overall status + FTW units */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -237,14 +309,17 @@ const MonitoringDashboard: React.FC = () => {
             Skor WQI: <strong className="text-slate-800">{waterMetrics.wqiScore}/100</strong>
           </p>
           <div className="mt-3 pt-3 border-t border-slate-100 space-y-2 text-[11px]">
-            <div className="flex items-center justify-between">
-              <span className="text-slate-500">pH</span>
-              <span className="font-bold text-slate-800">{waterMetrics.pH}</span>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-slate-500">DO</span>
-              <span className="font-bold text-slate-800">{waterMetrics.DO} mg/L</span>
-            </div>
+            {params.map((p) => (
+              <div key={p.key} className="flex items-center justify-between">
+                <span className="text-slate-500 flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${p.style.dot}`} />
+                  {p.label.split(' (')[0]}
+                </span>
+                <span className="font-bold text-slate-800">
+                  {p.value} {p.unit}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -261,13 +336,27 @@ const MonitoringDashboard: React.FC = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {ftwUnits.map((u) => (
-              <div key={u.id} className="p-4 rounded-2xl border border-slate-200 bg-slate-50/60">
+              <div key={u.id} className={`p-4 rounded-2xl border bg-slate-50/60 ${
+                simulationMode === 'Critical'
+                  ? 'border-rose-200'
+                  : simulationMode === 'Warning'
+                  ? 'border-amber-200'
+                  : 'border-slate-200'
+              }`}>
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-extrabold text-xs text-slate-900">{u.id}</span>
                   <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
-                    u.status === 'warning' ? 'bg-amber-100 text-amber-800' : u.status === 'offline' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'
+                    simulationMode === 'Critical'
+                      ? 'bg-rose-100 text-rose-800'
+                      : simulationMode === 'Warning'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'bg-emerald-100 text-emerald-800'
                   }`}>
-                    {u.status === 'warning' ? 'Waspada' : u.status === 'offline' ? 'Offline' : 'Aktif'}
+                    {simulationMode === 'Critical'
+                      ? 'Bahaya'
+                      : simulationMode === 'Warning'
+                      ? 'Waspada'
+                      : 'Aktif'}
                   </span>
                 </div>
                 <p className="text-xs font-bold text-slate-800 truncate mb-3">{u.name}</p>
@@ -304,23 +393,27 @@ const MonitoringDashboard: React.FC = () => {
             <button
               key={p.key}
               onClick={() => setActiveMetric(p.key)}
-              className="text-left bg-white rounded-2xl p-4 border transition-all cursor-pointer shadow-xs hover:shadow-md hover:border-teal-400 active:scale-[0.98]"
+              className={`relative text-left bg-white rounded-2xl p-4 border-2 transition-all cursor-pointer shadow-xs hover:shadow-md active:scale-[0.98] ${p.style.border}`}
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-xs font-bold text-slate-600 truncate">{p.label}</span>
-                <div className={`p-1.5 rounded-lg flex items-center justify-center ${p.color}`}>
+                <div className={`p-1.5 rounded-lg flex items-center justify-center ${p.style.bg} ${p.style.text}`}>
                   <MaterialIcon name={p.icon} className="text-base" />
                 </div>
               </div>
               <div className="flex items-baseline gap-1 my-1">
-                <span className="text-2xl font-extrabold text-slate-900 tracking-tight">{p.value}</span>
+                <span className={`text-2xl font-extrabold tracking-tight ${p.style.text}`}>{p.value}</span>
                 <span className="text-xs font-bold text-slate-400">{p.unit}</span>
               </div>
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between mt-3 text-[10px]">
+              <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase border ${p.style.badge} mt-1`}>
+                <span className={`w-1.5 h-1.5 rounded-full ${p.style.dot}`} />
+                {p.style.label}
+              </span>
+              <div className="pt-2 border-t border-slate-100 flex items-center justify-between mt-2 text-[10px]">
                 <span className="text-slate-400 font-bold flex items-center gap-1">
                   <MaterialIcon name="show_chart" className="text-xs" /> Tren
                 </span>
-                <MaterialIcon name="chevron_right" className="text-slate-300" />
+                <span className="text-slate-400">{p.optimalRange}</span>
               </div>
             </button>
           ))}
@@ -347,7 +440,7 @@ const MonitoringDashboard: React.FC = () => {
         </div>
       </div>
 
-      {activeMetric && <TrendModal paramKey={activeMetric} onClose={() => setActiveMetric(null)} />}
+      {activeMetric && <TrendModal paramKey={activeMetric} mode={simulationMode} onClose={() => setActiveMetric(null)} />}
 
       {showAnalysisModal && (
         <div
