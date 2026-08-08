@@ -134,16 +134,6 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
           </span>
         </div>
 
-        {/* Pintu Gates Labels */}
-        <div className="absolute left-4 bottom-4 bg-amber-50/95 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5 z-10">
-          <MaterialIcon name="vpn_key" className="text-amber-700 text-sm" />
-          <span className="text-[10px] font-bold text-amber-800">Pintu 01</span>
-        </div>
-        <div className="absolute right-4 bottom-4 bg-amber-50/95 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5 z-10">
-          <span className="text-[10px] font-bold text-amber-800">Pintu 02</span>
-          <MaterialIcon name="vpn_key" className="text-amber-700 text-sm" />
-        </div>
-
         {/* FTW Pins */}
         {(activeLayer === 'all' || activeLayer === 'ftw') &&
           ftwUnits.map((unit) => {
