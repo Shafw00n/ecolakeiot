@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserRole } from '../types';
+import { UserRole, MetricStatus } from '../types';
 import MaterialIcon from './MaterialIcon';
 
 export type ActiveTab =
@@ -31,6 +31,8 @@ interface SidebarProps {
   isMobileOpen: boolean;
   onCloseMobile: () => void;
   onOpenFTWDiagram: () => void;
+  simulationMode: MetricStatus;
+  onSimulationModeChange: (mode: MetricStatus) => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -40,6 +42,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isMobileOpen,
   onCloseMobile,
   onOpenFTWDiagram,
+  simulationMode,
+  onSimulationModeChange,
 }) => {
   // Define Role-based navigation items
   const getNavItems = (): NavItem[] => {
@@ -228,6 +232,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
             <span className="shrink-0 w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           </div>
+
+          {/* Mobile Simulation Mode Selector (only in drawer) */}
+          {userRole !== 'masyarakat' && (
+          <div className="mb-4 p-3.5 rounded-2xl border border-slate-200 bg-white shadow-sm lg:hidden">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <MaterialIcon name="tune" className="text-sm text-[#0F766E]" />
+                Simulasi Kondisi Air
+              </span>
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              {([
+                { key: 'Good' as MetricStatus, label: 'Aman', active: 'bg-emerald-600 text-white border-emerald-600 shadow-xs', inactive: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+                { key: 'Warning' as MetricStatus, label: 'Waspada', active: 'bg-amber-500 text-white border-amber-500 shadow-xs', inactive: 'bg-amber-50 text-amber-700 border-amber-200' },
+                { key: 'Critical' as MetricStatus, label: 'Bahaya', active: 'bg-rose-600 text-white border-rose-600 shadow-xs', inactive: 'bg-rose-50 text-rose-700 border-rose-200' },
+              ] as const).map((opt) => (
+                <button
+                  key={opt.key}
+                  onClick={() => onSimulationModeChange(opt.key)}
+                  className={`flex items-center justify-center px-1.5 py-2 rounded-lg text-[10px] font-extrabold border transition-all active:scale-95 ${
+                    simulationMode === opt.key ? opt.active : opt.inactive
+                  }`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          )}
 
           <div className="flex items-center gap-3 mb-2 px-2">
             <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">

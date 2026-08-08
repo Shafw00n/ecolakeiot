@@ -137,26 +137,27 @@ const TrendModal: React.FC<TrendModalProps> = ({ paramKey, onClose }) => {
 const MonitoringDashboard: React.FC = () => {
   const { waterMetrics, ftwUnits, simulationMode, setIsFTWDiagramOpen } = useApp();
   const [activeMetric, setActiveMetric] = useState<string | null>(null);
+  const [showAnalysisModal, setShowAnalysisModal] = useState(false);
 
   const getOverallStatus = () => {
-    if (simulationMode === 'Critical' || waterMetrics.status === 'Poor' || waterMetrics.DO < 4.0) {
+    if (simulationMode === 'Critical') {
       return {
-        label: 'Critical',
+        label: 'Bahaya',
         badge: 'bg-rose-100 text-rose-800 border-rose-200',
         dot: 'bg-rose-600 animate-ping',
         border: 'border-rose-200 bg-rose-50/60',
       };
     }
-    if (simulationMode === 'Warning' || waterMetrics.status === 'Moderate' || waterMetrics.DO < 6.0) {
+    if (simulationMode === 'Warning') {
       return {
-        label: 'Warning',
+        label: 'Waspada',
         badge: 'bg-amber-100 text-amber-800 border-amber-200',
         dot: 'bg-amber-500 animate-pulse',
         border: 'border-amber-200 bg-amber-50/60',
       };
     }
     return {
-      label: 'Safe',
+      label: 'Aman',
       badge: 'bg-emerald-100 text-emerald-800 border-emerald-200',
       dot: 'bg-emerald-500 animate-pulse',
       border: 'border-emerald-200 bg-emerald-50/60',
@@ -219,9 +220,18 @@ const MonitoringDashboard: React.FC = () => {
             <MaterialIcon name="shield" className="text-2xl text-slate-700" />
             <h3 className="font-extrabold text-slate-900 text-sm">Kualitas Air Keseluruhan</h3>
           </div>
-          <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-extrabold border ${status.badge}`}>
-            <span className={`w-3 h-3 rounded-full ${status.dot}`} />
-            {status.label.toUpperCase()}
+          <div className="flex items-center gap-2 mt-2">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-extrabold border ${status.badge}`}>
+              <span className={`w-3 h-3 rounded-full ${status.dot}`} />
+              {status.label.toUpperCase()}
+            </div>
+            <button
+              onClick={() => setShowAnalysisModal(true)}
+              className="flex items-center justify-center gap-1 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-bold rounded-lg shadow-xs transition-all active:scale-95"
+            >
+              <MaterialIcon name="analytics" className="text-sm" />
+              <span>Detail</span>
+            </button>
           </div>
           <p className="text-xs text-slate-500 mt-3">
             Skor WQI: <strong className="text-slate-800">{waterMetrics.wqiScore}/100</strong>
@@ -338,6 +348,169 @@ const MonitoringDashboard: React.FC = () => {
       </div>
 
       {activeMetric && <TrendModal paramKey={activeMetric} onClose={() => setActiveMetric(null)} />}
+
+      {showAnalysisModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm animate-in fade-in p-4"
+          style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+          onClick={() => setShowAnalysisModal(false)}
+        >
+          <div
+            className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl animate-in zoom-in duration-200 max-h-[85vh] flex flex-col overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className={`px-5 py-4 border-b shrink-0 ${
+              simulationMode === 'Critical'
+                ? 'bg-rose-50 border-rose-200'
+                : simulationMode === 'Warning'
+                ? 'bg-amber-50 border-amber-200'
+                : 'bg-emerald-50 border-emerald-200'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <span className={`p-2 rounded-xl ${
+                    simulationMode === 'Critical'
+                      ? 'bg-rose-100 text-rose-700'
+                      : simulationMode === 'Warning'
+                      ? 'bg-amber-100 text-amber-700'
+                      : 'bg-emerald-100 text-emerald-700'
+                  }`}>
+                    <MaterialIcon name="analytics" className="text-lg" />
+                  </span>
+                  <div>
+                    <h3 className="font-extrabold text-slate-900 text-sm">Analisa dan Rekomendasi Tindakan</h3>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider ${
+                      simulationMode === 'Critical'
+                        ? 'text-rose-600'
+                        : simulationMode === 'Warning'
+                        ? 'text-amber-600'
+                        : 'text-emerald-600'
+                    }`}>
+                      {simulationMode === 'Critical' ? 'Kondisi Bahaya' : simulationMode === 'Warning' ? 'Kondisi Waspada' : 'Kondisi Aman'}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowAnalysisModal(false)}
+                  className="p-2 rounded-full bg-white/80 text-slate-500 hover:bg-rose-100 hover:text-rose-600 transition-all shadow-xs"
+                  aria-label="Tutup"
+                >
+                  <MaterialIcon name="close" className="text-base" />
+                </button>
+              </div>
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto overscroll-contain p-5 space-y-5">
+
+              {/* Aman */}
+              {simulationMode === 'Good' && (
+                <>
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                    <h4 className="font-extrabold text-emerald-900 text-sm mb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      KONDISI 1: AMAN
+                    </h4>
+                    <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
+                      <p>
+                        <strong className="text-slate-900">Analisis Sensor:</strong> Semua nilai berada diambang batas optimal. Nilai DO yang tinggi (6.5 mg/L) menunjukkan pasokan oksigen melimpah. Kekeruhan yang rendah (12 NTU) menjamin proses fotosintesis vegetasi bawah air berjalan baik.
+                      </p>
+                      <div>
+                        <strong className="text-slate-900">Rekomendasi Tindakan di Dashboard:</strong>
+                        <ul className="mt-2 space-y-1.5 pl-4">
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-emerald-400">
+                            "Kondisi air danau dalam keadaan sehat. Lanjutkan pemantauan rutin harian."
+                          </li>
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-emerald-400">
+                            "Sistem Smart FTW beroperasi dalam mode hemat energi (Eco-Mode)."
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* Waspada */}
+              {simulationMode === 'Warning' && (
+                <>
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+                    <h4 className="font-extrabold text-amber-900 text-sm mb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                      KONDISI 2: WASPADA
+                    </h4>
+                    <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
+                      <p>
+                        <strong className="text-slate-900">Analisis Sensor:</strong> DO mulai turun (3.5 mg/L), temperatur naik, dan kekeruhan meningkat (45 NTU). Kombinasi suhu hangat dan kekeruhan ini biasanya dipicu oleh tingginya fosfat/nitrat (dari limbah detergen atau pupuk pertanian), memicu ledakan alga (<em>algae bloom</em>). Alga yang mati lalu diurai bakteri, memakan banyak oksigen (DO drop).
+                      </p>
+                      <div>
+                        <strong className="text-slate-900">Rekomendasi Tindakan di Dashboard:</strong>
+                        <ul className="mt-2 space-y-2 pl-4">
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-amber-400">
+                            "Peringatan: Terjadi penurunan Oksigen Terlarut (DO) dan peningkatan kekeruhan. Terindikasi gejala awal Eutrofikasi."
+                          </li>
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-amber-400">
+                            <strong>Tindakan Fisik:</strong> "Aktifkan aerator tambahan (jika ada pada FTW) untuk menyuntikkan oksigen ke dalam air."
+                          </li>
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-amber-400">
+                            <strong>Tindakan Biologis:</strong> "Posisikan unit Smart FTW bergerak menuju area dengan kekeruhan tertinggi untuk mempercepat penyerapan zat hara (Nitrat/Fosfat) oleh akar tanaman."
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* Bahaya */}
+              {simulationMode === 'Critical' && (
+                <>
+                  <div className="bg-rose-50 border border-rose-200 rounded-xl p-4">
+                    <h4 className="font-extrabold text-rose-900 text-sm mb-2 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
+                      KONDISI 3: BAHAYA
+                    </h4>
+                    <div className="space-y-3 text-xs text-slate-700 leading-relaxed">
+                      <p>
+                        <strong className="text-slate-900">Analisis Sensor:</strong> pH drop drastis menjadi sangat asam (5.2), DO kritis (1.8 mg/L), kekeruhan sangat tinggi (85 NTU), dan TDS melonjak tinggi (1250 mg/L). Ini adalah indikasi kuat masuknya limbah industri, limbah domestik masif, atau limpasan sedimen lumpur pekat. Ikan dan organisme air terancam mati massal akibat anoksia (kekurangan oksigen) dan racun keasaman.
+                      </p>
+                      <div>
+                        <strong className="text-slate-900">Rekomendasi Tindakan di Dashboard:</strong>
+                        <ul className="mt-2 space-y-2 pl-4">
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-rose-400">
+                            "ALARM BAHAYA: Mutu air rusak berat. Potensi kematian massal biota danau tinggi."
+                          </li>
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-rose-400">
+                            <strong>Tindakan Otomatis Sistem:</strong> "Kirim notifikasi darurat (Peringatan Bahaya) via Telegram/Blynk kepada Dinas Lingkungan Hidup setempat atau pengelola danau."
+                          </li>
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-rose-400">
+                            <strong>Tindakan Kimia/Fisik:</strong> "Rekomendasi penaburan kapur pertanian (Kalsium Karbonat/CaCO3) di sekitar titik sensor untuk menetralkan pH yang asam."
+                          </li>
+                          <li className="relative before:content-[''] before:absolute before:-left-2.5 before:top-[6px] before:w-1.5 before:h-1.5 before:rounded-full before:bg-rose-400">
+                            <strong>Tindakan Mitigasi:</strong> "Isolasi atau tutup sementara saluran masuk (inlet) air eksternal yang menuju ke danau untuk menghentikan sumber polutan."
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+            </div>
+
+            {/* Footer */}
+            <div className="px-5 py-3 border-t border-slate-100 bg-slate-50 shrink-0">
+              <button
+                onClick={() => setShowAnalysisModal(false)}
+                className="w-full px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all active:scale-95"
+              >
+                Tutup
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

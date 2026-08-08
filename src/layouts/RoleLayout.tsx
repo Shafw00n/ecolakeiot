@@ -102,6 +102,8 @@ export const RoleLayout: React.FC<RoleLayoutProps> = ({ role }) => {
           isMobileOpen={isMobileMenuOpen}
           onCloseMobile={() => setIsMobileMenuOpen(false)}
           onOpenFTWDiagram={() => setIsFTWDiagramOpen(true)}
+          simulationMode={simulationMode}
+          onSimulationModeChange={setSimulationMode}
         />
 
         <main className="flex-1 p-4 lg:p-6 pb-24 lg:pb-8 overflow-x-hidden min-w-0">

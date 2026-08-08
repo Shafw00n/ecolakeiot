@@ -58,7 +58,7 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200 p-4" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
       {/* Backdrop */}
       <div
         className="absolute inset-0"
@@ -66,7 +66,7 @@ export const FTWDiagramModal: React.FC<FTWDiagramModalProps> = ({ isOpen, onClos
       />
 
       {/* Modal Card */}
-      <div className="relative flex flex-col bg-white w-full sm:max-w-4xl sm:rounded-2xl shadow-2xl border-0 sm:border border-slate-200 overflow-hidden z-10 animate-in zoom-in-95 duration-200 mx-0 sm:mx-3 sm:my-4 sm:my-8 max-h-full sm:max-h-[90vh]">
+      <div className="relative flex flex-col bg-white w-full sm:max-w-4xl sm:rounded-2xl shadow-2xl border-0 sm:border border-slate-200 overflow-hidden z-10 animate-in zoom-in-95 duration-200 max-h-full sm:max-h-[90vh]">
         
         {/* Header */}
         <div className="bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 text-white p-4 sm:p-6 relative overflow-hidden shrink-0">
