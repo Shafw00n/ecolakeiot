@@ -68,8 +68,8 @@ export const TERELMETRY_PARAMS: {
   is: string;
 }[] = [
   { key: 'pH', label: 'pH', unit: '', icon: 'water_drop', color: 'text-sky-700', bg: 'bg-sky-50 border-sky-200', bar: '#0284c7', is: '' },
-  { key: 'DO', label: 'Dissolved Oxygen', unit: 'mg/L', icon: 'air', color: 'text-teal-700', bg: 'bg-teal-50 border-teal-200', bar: '#0d9488', is: '' },
-  { key: 'temperature', label: 'Water Temperature', unit: '°C', icon: 'thermostat', color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-200', bar: '#059669', is: '' },
-  { key: 'turbidity', label: 'Turbidity', unit: 'NTU', icon: 'blur_on', color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200', bar: '#d97706', is: '' },
-  { key: 'tds', label: 'Total Dissolved Solids', unit: 'mg/L', icon: 'electric_bolt', color: 'text-cyan-700', bg: 'bg-cyan-50 border-cyan-200', bar: '#0891b2', is: '' },
+  { key: 'DO', label: 'Oksigen Terlarut (DO)', unit: 'mg/L', icon: 'air', color: 'text-teal-700', bg: 'bg-teal-50 border-teal-200', bar: '#0d9488', is: '' },
+  { key: 'temperature', label: 'Suhu Air', unit: '°C', icon: 'thermostat', color: 'text-emerald-700', bg: 'bg-emerald-50 border-emerald-200', bar: '#059669', is: '' },
+  { key: 'turbidity', label: 'Kekeruhan', unit: 'NTU', icon: 'blur_on', color: 'text-amber-700', bg: 'bg-amber-50 border-amber-200', bar: '#d97706', is: '' },
+  { key: 'tds', label: 'Total Padatan Terlarut (TDS)', unit: 'mg/L', icon: 'electric_bolt', color: 'text-cyan-700', bg: 'bg-cyan-50 border-cyan-200', bar: '#0891b2', is: '' },
 ];

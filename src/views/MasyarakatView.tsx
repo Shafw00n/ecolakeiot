@@ -94,21 +94,21 @@ export const MasyarakatView: React.FC<MasyarakatViewProps> = ({
         return (
           <span className="bg-sky-100 text-sky-800 border border-sky-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-            New
+            Baru
           </span>
         );
       case 'In Progress':
         return (
           <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-            In Progress
+            Diproses
           </span>
         );
       case 'Resolved':
         return (
           <span className="bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            Resolved
+            Selesai
           </span>
         );
     }
@@ -305,7 +305,7 @@ export const MasyarakatView: React.FC<MasyarakatViewProps> = ({
               {/* Upload Foto (Attach Image dengan Preview) */}
               <div>
                 <label className="block text-slate-700 font-bold mb-1">
-                  Upload Foto Bukti <span className="text-slate-400 font-normal">(Attach Image)</span>
+                  Upload Foto Bukti
                 </label>
 
                 <div className="space-y-2">

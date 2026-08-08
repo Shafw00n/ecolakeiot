@@ -143,7 +143,7 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
                   <MaterialIcon name="mark_email_read" className="text-base" /> Notifikasi Otomatis Tersebar:
                 </span>
                 <span className="bg-sky-100 text-sky-800 border border-sky-300 text-[10px] px-2 py-0.5 rounded-full font-extrabold">
-                  Status: New
+                  Status: Baru
                 </span>
               </div>
               <ul className="text-[11px] text-slate-600 space-y-1 pl-1">
@@ -270,7 +270,7 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
             {/* Upload Foto / Attach Image */}
             <div>
               <label className="block text-slate-700 font-bold mb-1">
-                Upload Foto Laporan <span className="text-slate-400 font-normal">(Bukti Fisik)</span>
+                Upload Foto Laporan
               </label>
 
               <div className="space-y-2">

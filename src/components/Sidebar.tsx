@@ -321,7 +321,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="p-4 border-t border-slate-100 text-center" style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom, 0px))' }}>
           <div className="flex items-center justify-center gap-2 text-[11px] font-bold text-slate-400">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Role Active: {userRole.toUpperCase()}</span>
+            <span>Peran Aktif: {userRole.toUpperCase()}</span>
             <span className="text-slate-300">•</span>
             <span className="text-slate-400">v1.0</span>
           </div>

@@ -29,21 +29,21 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
         return (
           <span className="bg-sky-100 text-sky-800 border border-sky-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-            New
+            Baru
           </span>
         );
       case 'In Progress':
         return (
           <span className="bg-amber-100 text-amber-800 border border-amber-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-            In Progress
+            Diproses
           </span>
         );
       case 'Resolved':
         return (
           <span className="bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            Resolved
+            Selesai
           </span>
         );
     }
@@ -97,7 +97,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              {st}{' '}
+              {st === 'All' ? 'Semua' : st === 'New' ? 'Baru' : st === 'In Progress' ? 'Diproses' : 'Selesai'}{' '}
               <span className="text-[10px] opacity-70">
                 ({st === 'All' ? complaints.length : complaints.filter((c) => c.status === st).length})
               </span>
@@ -180,7 +180,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
                         className="px-3.5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1 active:scale-95"
                       >
                         <MaterialIcon name="engineering" className="text-sm" />
-                        <span>Start Processing</span>
+                        <span>Mulai Proses</span>
                       </button>
                     )}
 
@@ -190,7 +190,7 @@ export const PublicComplaintsList: React.FC<PublicComplaintsListProps> = ({
                         className="px-3.5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] rounded-lg shadow-2xs transition-all flex items-center gap-1 active:scale-95"
                       >
                         <MaterialIcon name="check_circle" className="text-sm" />
-                        <span>Mark Resolved</span>
+                        <span>Tandai Selesai</span>
                       </button>
                     )}
                   </div>

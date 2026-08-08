@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   )}
                 </span>
                 <span className="hidden sm:inline-block bg-sky-50 text-sky-700 border border-sky-200/80 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Lake IoT
+                  Danau IoT
                 </span>
               </div>
               <p className="text-xs hidden sm:block text-slate-500">
@@ -96,7 +96,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-sky-800 bg-sky-50 hover:bg-sky-100/80 rounded-xl border border-sky-200 transition-all shadow-xs active:scale-95"
             >
               <MaterialIcon name="schema" className="text-base text-sky-600" />
-              <span>Arsitektur FTW System</span>
+              <span>Arsitektur Sistem FTW</span>
             </button>
 
             {/* Mode Simulation Toggle */}

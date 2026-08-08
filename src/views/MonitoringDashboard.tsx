@@ -41,7 +41,7 @@ const TrendModal: React.FC<TrendModalProps> = ({ paramKey, onClose }) => {
               <MaterialIcon name={param.icon} className={`text-xl ${param.color}`} />
             </div>
             <div className="min-w-0">
-              <h3 className="font-extrabold text-base truncate">Historical Trend: {param.label}</h3>
+              <h3 className="font-extrabold text-base truncate">Tren Historis: {param.label}</h3>
               <p className="text-xs text-slate-400">Pola perubahan parameter {param.unit && `(${param.unit})`}</p>
             </div>
           </div>
@@ -65,7 +65,7 @@ const TrendModal: React.FC<TrendModalProps> = ({ paramKey, onClose }) => {
                   timeframe === t ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
                 }`}
               >
-                {t === '24h' ? '24 Hours' : t === '7d' ? '7 Days' : '30 Days'}
+                {t === '24h' ? '24 Jam' : t === '7d' ? '7 Hari' : '30 Hari'}
               </button>
             ))}
           </div>
@@ -167,11 +167,11 @@ const MonitoringDashboard: React.FC = () => {
 
   // 5 parameter cards with click -> trend modal
   const params = [
-    { key: 'pH', label: 'pH (Acidity)', value: waterMetrics.pH.toFixed(2), unit: '', icon: 'water_drop', color: 'bg-sky-100 text-sky-700' },
-    { key: 'DO', label: 'Dissolved Oxygen', value: waterMetrics.DO.toFixed(2), unit: 'mg/L', icon: 'air', color: 'bg-teal-100 text-teal-700' },
-    { key: 'temperature', label: 'Water Temperature', value: waterMetrics.temperature.toFixed(1), unit: '°C', icon: 'thermostat', color: 'bg-emerald-100 text-emerald-700' },
-    { key: 'turbidity', label: 'Turbidity', value: waterMetrics.turbidity.toFixed(1), unit: 'NTU', icon: 'blur_on', color: 'bg-amber-100 text-amber-700' },
-    { key: 'tds', label: 'Total Dissolved Solids', value: waterMetrics.tds.toFixed(0), unit: 'mg/L', icon: 'electric_bolt', color: 'bg-cyan-100 text-cyan-700' },
+    { key: 'pH', label: 'pH (Keasaman)', value: waterMetrics.pH.toFixed(2), unit: '', icon: 'water_drop', color: 'bg-sky-100 text-sky-700' },
+    { key: 'DO', label: 'Oksigen Terlarut (DO)', value: waterMetrics.DO.toFixed(2), unit: 'mg/L', icon: 'air', color: 'bg-teal-100 text-teal-700' },
+    { key: 'temperature', label: 'Suhu Air', value: waterMetrics.temperature.toFixed(1), unit: '°C', icon: 'thermostat', color: 'bg-emerald-100 text-emerald-700' },
+    { key: 'turbidity', label: 'Kekeruhan (Turbidity)', value: waterMetrics.turbidity.toFixed(1), unit: 'NTU', icon: 'blur_on', color: 'bg-amber-100 text-amber-700' },
+    { key: 'tds', label: 'Total Padatan Terlarut (TDS)', value: waterMetrics.tds.toFixed(0), unit: 'mg/L', icon: 'electric_bolt', color: 'bg-cyan-100 text-cyan-700' },
   ];
 
   return (
@@ -188,17 +188,17 @@ const MonitoringDashboard: React.FC = () => {
             <div className="flex items-center gap-2 mb-2">
               <span className="bg-emerald-900/60 text-emerald-200 border border-emerald-400/30 text-xs font-bold px-3 py-1 rounded-xl flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                Live Sensor Telemetry
+                Telemetri Sensor Real-time
               </span>
               <span className="text-emerald-100/80 text-xs hidden sm:inline font-medium">
-                • Last update: {waterMetrics.timestamp}
+                • Terakhir diperbarui: {waterMetrics.timestamp}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Situ Gede Lake Water Quality Monitoring
+              Monitoring Kualitas Air Danau Situ Gede
             </h1>
             <p className="text-emerald-50 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
-              Floating Treatment Wetland (FTW) integrated with real-time IoT sensors, automatic alerts and water quality analysis.
+              Floating Treatment Wetland (FTW) terintegrasi dengan sensor IoT real-time, peringatan otomatis, dan analisis kualitas air.
             </p>
           </div>
           <button
@@ -206,7 +206,7 @@ const MonitoringDashboard: React.FC = () => {
             className="flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl border border-white/20 backdrop-blur-xs shadow-xs active:scale-95 self-start md:self-auto"
           >
             <MaterialIcon name="schema" className="text-emerald-300 text-base" />
-            <span>FTW Architecture Infographic</span>
+            <span>Infografis Arsitektur FTW</span>
           </button>
         </div>
       </div>
@@ -217,14 +217,14 @@ const MonitoringDashboard: React.FC = () => {
         <div className={`rounded-2xl p-5 border ${status.border} bg-white shadow-xs`}>
           <div className="flex items-center gap-2 mb-2">
             <MaterialIcon name="shield" className="text-2xl text-slate-700" />
-            <h3 className="font-extrabold text-slate-900 text-sm">Overall Water Quality</h3>
+            <h3 className="font-extrabold text-slate-900 text-sm">Kualitas Air Keseluruhan</h3>
           </div>
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-extrabold border ${status.badge}`}>
             <span className={`w-3 h-3 rounded-full ${status.dot}`} />
             {status.label.toUpperCase()}
           </div>
           <p className="text-xs text-slate-500 mt-3">
-            WQI Score: <strong className="text-slate-800">{waterMetrics.wqiScore}/100</strong>
+            Skor WQI: <strong className="text-slate-800">{waterMetrics.wqiScore}/100</strong>
           </p>
           <div className="mt-3 pt-3 border-t border-slate-100 space-y-2 text-[11px]">
             <div className="flex items-center justify-between">
@@ -244,8 +244,8 @@ const MonitoringDashboard: React.FC = () => {
             <div className="flex items-center gap-2">
               <MaterialIcon name="sensors" className="text-slate-700 text-2xl" />
               <div>
-                <h3 className="font-extrabold text-slate-900 text-sm">FTW Stations Status</h3>
-                <p className="text-xs text-slate-500">IoT devices, solar power & water circulation</p>
+                <h3 className="font-extrabold text-slate-900 text-sm">Status Stasiun FTW</h3>
+                <p className="text-xs text-slate-500">Perangkat IoT, tenaga surya & sirkulasi air</p>
               </div>
             </div>
           </div>
@@ -257,17 +257,17 @@ const MonitoringDashboard: React.FC = () => {
                   <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase ${
                     u.status === 'warning' ? 'bg-amber-100 text-amber-800' : u.status === 'offline' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'
                   }`}>
-                    {u.status === 'warning' ? 'Warning' : u.status === 'offline' ? 'Offline' : 'Active'}
+                    {u.status === 'warning' ? 'Waspada' : u.status === 'offline' ? 'Offline' : 'Aktif'}
                   </span>
                 </div>
                 <p className="text-xs font-bold text-slate-800 truncate mb-3">{u.name}</p>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="bg-white p-2 rounded-xl border border-slate-200/80">
-                    <span className="text-[10px] text-slate-400 block font-medium">Battery</span>
+                    <span className="text-[10px] text-slate-400 block font-medium">Baterai</span>
                     <span className="font-bold text-slate-800">{u.battery}%</span>
                   </div>
                   <div className="bg-white p-2 rounded-xl border border-slate-200/80">
-                    <span className="text-[10px] text-slate-400 block font-medium">Solar</span>
+                    <span className="text-[10px] text-slate-400 block font-medium">Tenaga Surya</span>
                     <span className="font-bold text-slate-800">{u.solarOutput}W</span>
                   </div>
                 </div>
@@ -283,9 +283,9 @@ const MonitoringDashboard: React.FC = () => {
           <div>
             <h3 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
               <MaterialIcon name="tune" className="text-slate-700 text-xl" />
-              <span>5 Key Sensor Parameters (Click card for historical chart)</span>
+              <span>5 Parameter Sensor Utama (Klik kartu untuk grafik historis)</span>
             </h3>
-            <p className="text-xs text-slate-500">Values update automatically in real-time</p>
+            <p className="text-xs text-slate-500">Nilai diperbarui otomatis secara real-time</p>
           </div>
         </div>
 
@@ -308,7 +308,7 @@ const MonitoringDashboard: React.FC = () => {
               </div>
               <div className="pt-2 border-t border-slate-100 flex items-center justify-between mt-3 text-[10px]">
                 <span className="text-slate-400 font-bold flex items-center gap-1">
-                  <MaterialIcon name="show_chart" className="text-xs" /> Trend
+                  <MaterialIcon name="show_chart" className="text-xs" /> Tren
                 </span>
                 <MaterialIcon name="chevron_right" className="text-slate-300" />
               </div>
@@ -327,12 +327,12 @@ const MonitoringDashboard: React.FC = () => {
           <div className="flex items-center gap-2 mb-4">
             <MaterialIcon name="show_chart" className="text-slate-700 text-xl" />
             <div>
-              <h3 className="text-sm font-extrabold text-slate-900">Tip</h3>
-              <p className="text-xs text-slate-500">Click any parameter card above to open 24h / 7d / 30d historical trend.</p>
+              <h3 className="text-sm font-extrabold text-slate-900">Tips</h3>
+              <p className="text-xs text-slate-500">Klik kartu parameter di atas untuk membuka grafik tren historis 24 jam / 7 hari / 30 hari.</p>
             </div>
           </div>
           <div className="p-4 bg-slate-50 rounded-xl text-xs text-slate-600 leading-relaxed">
-            Sensor data updates every 5 seconds. Use the simulation toggle in the navbar (Normal / Warning / Critical) to preview status changes and their effects on all monitored parameters.
+            Data sensor diperbarui setiap 5 detik. Gunakan toggle simulasi di navbar (Aman / Waspada / Bahaya) untuk melihat pratinjau perubahan status dan dampaknya terhadap seluruh parameter yang dipantau.
           </div>
         </div>
       </div>

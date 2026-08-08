@@ -108,7 +108,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
               filterStatus === 'active' ? 'bg-emerald-600 text-white font-bold shadow-xs' : 'text-slate-600'
             }`}
           >
-            Active
+            Aktif
           </button>
           <button
             onClick={() => setFilterStatus('warning')}
@@ -116,7 +116,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
               filterStatus === 'warning' ? 'bg-amber-500 text-white font-bold shadow-xs' : 'text-slate-600'
             }`}
           >
-            Warning
+            Waspada
           </button>
         </div>
       </div>
@@ -147,7 +147,7 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
                       : 'bg-amber-100 text-amber-800'
                   }`}
                 >
-                  {r.status}
+                  {r.status === 'Active' ? 'Aktif' : 'Waspada'}
                 </span>
               </div>
 

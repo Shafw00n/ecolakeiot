@@ -24,6 +24,9 @@ export const IPBView: React.FC<IPBViewProps> = ({
   onOpenPublicPortal,
 }) => {
   const [showAddModal, setShowAddModal] = useState(false);
+
+  const validationLabel = (v: string) =>
+    v === 'Validated' ? 'Tervalidasi' : v === 'Pending' ? 'Menunggu' : 'Ditolak';
   const [newSample, setNewSample] = useState({
     sampleCode: 'LAB-SG-10A',
     location: 'FTW-01 Inflow',
@@ -197,7 +200,7 @@ export const IPBView: React.FC<IPBViewProps> = ({
                       : 'bg-rose-100 text-rose-800'
                   }`}
                 >
-                  {s.validationStatus}
+                  {validationLabel(s.validationStatus)}
                 </span>
               </div>
 
@@ -281,7 +284,7 @@ export const IPBView: React.FC<IPBViewProps> = ({
                           : 'bg-rose-100 text-rose-800'
                       }`}
                     >
-                      {s.validationStatus}
+                      {validationLabel(s.validationStatus)}
                     </span>
                   </td>
                   <td className="p-3">
@@ -316,7 +319,7 @@ export const IPBView: React.FC<IPBViewProps> = ({
               "Efficiency of Phytoremediation in Tropical Lakes using FTW IoT Monitoring"
             </h4>
             <p className="text-slate-600 mt-1">
-              Penulis: Prof. Dr. Maya Roseti et al. Status: Under Review Jurnal Limnologi Indonesia.
+              Penulis: Prof. Dr. Maya Roseti et al. Status: Dalam Tinjauan Jurnal Limnologi Indonesia.
             </p>
           </div>
 

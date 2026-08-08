@@ -58,7 +58,7 @@ export const KLHView: React.FC<KLHViewProps> = ({
         <div className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between">
           <div>
             <span className="text-xs font-semibold text-slate-500">Total Sensor IoT Terpasang</span>
-            <div className="text-2xl font-extrabold text-slate-900 mt-1">21 Sensors</div>
+            <div className="text-2xl font-extrabold text-slate-900 mt-1">21 Sensor</div>
             <span className="text-[10px] text-emerald-600 font-bold">Tersebar di 3 Danau</span>
           </div>
           <div className="p-3 bg-teal-50 text-teal-700 rounded-xl">

@@ -73,7 +73,7 @@ export const AIAdvisorCard: React.FC<AIAdvisorCardProps> = ({ decisions, metrics
         </div>
         <span className="text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-          Realtime AI Active
+          Realtime AI Aktif
         </span>
       </div>
 
@@ -119,7 +119,7 @@ export const AIAdvisorCard: React.FC<AIAdvisorCardProps> = ({ decisions, metrics
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300 mt-2 bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
               <div>
-                <span className="text-[10px] text-slate-400 block font-semibold uppercase">Penyebab (Causes):</span>
+                <span className="text-[10px] text-slate-400 block font-semibold uppercase">Penyebab:</span>
                 <span className="text-slate-200 leading-tight">{item.cause}</span>
               </div>
               <div>
