@@ -23,9 +23,9 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
 
   const rangerPosition = {
     name: 'Patroli Ranger-04 (Ahmad Fauzi)',
-    location: 'Zona Pintu 1 - Barat',
-    mapX: 25,
-    mapY: 65,
+    location: 'Tepi Barat Daya',
+    mapX: 18,
+    mapY: 78,
     status: 'Active Patrol',
   };
 
@@ -135,13 +135,13 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
         </div>
 
         {/* Pintu Gates Labels */}
-        <div className="absolute left-3 top-1/2 bg-amber-50/95 backdrop-blur-xs px-2 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5">
+        <div className="absolute left-4 bottom-4 bg-amber-50/95 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5 z-10">
           <MaterialIcon name="vpn_key" className="text-amber-700 text-sm" />
           <span className="text-[10px] font-bold text-amber-800">Pintu 01</span>
         </div>
-        <div className="absolute right-3 top-1/2 bg-amber-50/95 backdrop-blur-xs px-2 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5">
-          <MaterialIcon name="vpn_key" className="text-amber-700 text-sm" />
+        <div className="absolute right-4 bottom-4 bg-amber-50/95 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5 z-10">
           <span className="text-[10px] font-bold text-amber-800">Pintu 02</span>
+          <MaterialIcon name="vpn_key" className="text-amber-700 text-sm" />
         </div>
 
         {/* FTW Pins */}
