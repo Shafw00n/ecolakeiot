@@ -13,16 +13,14 @@ export const DatabaseView: React.FC<DatabaseViewProps> = ({ ftwUnits, metrics })
 
   // Generate 10 detailed IoT Sensor Probe records for the table
   const sensorDatabaseRecords = [
-    { id: 'SNS-SG-01', type: 'Probe pH Glass Electrode', unit: 'FTW-01', location: 'Zona Inflow Utara', value: `${metrics.pH} pH`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
-    { id: 'SNS-SG-02', type: 'Probe DO Optical Luminescent', unit: 'FTW-01', location: 'Zona Inflow Utara', value: `${metrics.DO} mg/L`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
-    { id: 'SNS-SG-03', type: 'Probe Turbidity Infrared', unit: 'FTW-01', location: 'Zona Inflow Utara', value: `${metrics.turbidity} NTU`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
-    { id: 'SNS-SG-04', type: 'Probe Temp PT100', unit: 'FTW-01', location: 'Zona Inflow Utara', value: `${metrics.temperature} °C`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
-    { id: 'SNS-SG-05', type: 'Probe DO Optical Luminescent', unit: 'FTW-02', location: 'Zona Bio-Filtrasi Tengah', value: '5.90 mg/L', lastUpdate: '12 detik yang lalu', status: 'Warning', battery: '74%' },
-    { id: 'SNS-SG-06', type: 'Probe Nitrate Ion-Selective', unit: 'FTW-02', location: 'Zona Bio-Filtrasi Tengah', value: '1.85 mg/L', lastUpdate: '12 detik yang lalu', status: 'Active', battery: '74%' },
-    { id: 'SNS-SG-07', type: 'Probe Phosphate Photometric', unit: 'FTW-02', location: 'Zona Bio-Filtrasi Tengah', value: '0.26 mg/L', lastUpdate: '12 detik yang lalu', status: 'Active', battery: '74%' },
-    { id: 'SNS-SG-08', type: 'Probe pH Glass Electrode', unit: 'FTW-03', location: 'Zona Outlet Danau', value: '7.40 pH', lastUpdate: '8 detik yang lalu', status: 'Active', battery: '91%' },
-    { id: 'SNS-SG-09', type: 'Probe DO Optical Luminescent', unit: 'FTW-03', location: 'Zona Outlet Danau', value: '7.10 mg/L', lastUpdate: '8 detik yang lalu', status: 'Active', battery: '91%' },
-    { id: 'SNS-SG-10', type: 'ESP32 IoT Gateway Microcontroller', unit: 'FTW-01', location: 'Kotak Kontrol Dermaga', value: 'MQTT Connected', lastUpdate: '5 detik yang lalu', status: 'Active', battery: '98%' },
+    { id: 'SNS-SG-01', type: 'Probe pH Glass Electrode', unit: 'FTW-01', location: 'Pintu 1 - Tepi Barat', value: `${metrics.pH} pH`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
+    { id: 'SNS-SG-02', type: 'Probe DO Optical Luminescent', unit: 'FTW-01', location: 'Pintu 1 - Tepi Barat', value: `${metrics.DO} mg/L`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
+    { id: 'SNS-SG-03', type: 'Probe Turbidity Infrared', unit: 'FTW-01', location: 'Pintu 1 - Tepi Barat', value: `${metrics.turbidity} NTU`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
+    { id: 'SNS-SG-04', type: 'Probe Temp PT100', unit: 'FTW-01', location: 'Pintu 1 - Tepi Barat', value: `${metrics.temperature} °C`, lastUpdate: '10 detik yang lalu', status: 'Active', battery: '98%' },
+    { id: 'SNS-SG-05', type: 'Probe DO Optical Luminescent', unit: 'FTW-02', location: 'Pintu 2 - Tepi Timur', value: '5.90 mg/L', lastUpdate: '12 detik yang lalu', status: 'Warning', battery: '74%' },
+    { id: 'SNS-SG-06', type: 'Probe Nitrate Ion-Selective', unit: 'FTW-02', location: 'Pintu 2 - Tepi Timur', value: '1.85 mg/L', lastUpdate: '12 detik yang lalu', status: 'Active', battery: '74%' },
+    { id: 'SNS-SG-07', type: 'Probe Phosphate Photometric', unit: 'FTW-02', location: 'Pintu 2 - Tepi Timur', value: '0.26 mg/L', lastUpdate: '12 detik yang lalu', status: 'Active', battery: '74%' },
+    { id: 'SNS-SG-10', type: 'ESP32 IoT Gateway Microcontroller', unit: 'FTW-01', location: 'Kotak Kontrol Pintu 1', value: 'MQTT Connected', lastUpdate: '5 detik yang lalu', status: 'Active', battery: '98%' },
   ];
 
   const filteredRecords = sensorDatabaseRecords.filter((rec) => {

@@ -23,7 +23,7 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
 
   const rangerPosition = {
     name: 'Patroli Ranger-04 (Ahmad Fauzi)',
-    location: 'Zona Dermaga Barat',
+    location: 'Zona Pintu 1 - Barat',
     mapX: 25,
     mapY: 65,
     status: 'Active Patrol',
@@ -132,6 +132,16 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
             <MaterialIcon name="water" className="text-sky-600 text-base" />
             Danau Situ Gede, Bogor (6.2 Ha)
           </span>
+        </div>
+
+        {/* Pintu Gates Labels */}
+        <div className="absolute left-3 top-1/2 bg-amber-50/95 backdrop-blur-xs px-2 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5">
+          <MaterialIcon name="vpn_key" className="text-amber-700 text-sm" />
+          <span className="text-[10px] font-bold text-amber-800">Pintu 01</span>
+        </div>
+        <div className="absolute right-3 top-1/2 bg-amber-50/95 backdrop-blur-xs px-2 py-1.5 rounded-xl border border-amber-200/90 shadow-xs flex items-center gap-1.5">
+          <MaterialIcon name="vpn_key" className="text-amber-700 text-sm" />
+          <span className="text-[10px] font-bold text-amber-800">Pintu 02</span>
         </div>
 
         {/* FTW Pins */}

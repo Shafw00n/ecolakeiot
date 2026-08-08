@@ -110,7 +110,7 @@ const INITIAL_PUBLIC_COMPLAINTS: PublicComplaint[] = [
   {
     id: 'ADUAN-8475',
     reporterName: 'Ahmad Fauzi',
-    location: 'FTW-03',
+    location: 'FTW-02',
     issueCategory: 'Tanaman FTW rusak',
     description: 'Tanaman vetiver di sudut selatan terlihat agak menguning setelah hujan deras kemarin.',
     timestamp: 'Kemarin, 16:40 WIB',

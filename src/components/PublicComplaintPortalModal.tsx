@@ -229,9 +229,8 @@ export const PublicComplaintPortalModal: React.FC<PublicComplaintPortalModalProp
                   onChange={(e) => setLocation(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-800 font-bold focus:bg-white focus:border-[#0F766E] focus:outline-none"
                 >
-                  <option value="FTW-01">FTW-01 (Dermaga Barat)</option>
-                  <option value="FTW-02">FTW-02 (Dermaga Tengah)</option>
-                  <option value="FTW-03">FTW-03 (Pusat Danau)</option>
+                  <option value="FTW-01">FTW-01 (Pintu 1)</option>
+                  <option value="FTW-02">FTW-02 (Pintu 2)</option>
                 </select>
               </div>
 

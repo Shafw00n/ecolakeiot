@@ -439,7 +439,7 @@ export const MainDashboardView: React.FC<MainDashboardViewProps> = ({
           <div className="flex items-center gap-2">
             <MaterialIcon name="sensors" className="text-[#0F766E] text-2xl" />
             <div>
-              <h3 className="font-extrabold text-slate-900 text-sm">Status Stasiun FTW (FTW-01, FTW-02, FTW-03)</h3>
+              <h3 className="font-extrabold text-slate-900 text-sm">Status Stasiun FTW (FTW-01, FTW-02)</h3>
               <p className="text-xs text-slate-500">Perangkat IoT, daya panel surya & sirkulasi air</p>
             </div>
           </div>
@@ -515,7 +515,7 @@ export const MainDashboardView: React.FC<MainDashboardViewProps> = ({
                   </h4>
                   <div className="mt-2 text-xs text-rose-200 space-y-1">
                     <p>• Status: <strong className="text-white uppercase font-black">Tidak Aman</strong></p>
-                    <p>• Lokasi: <strong>FTW-02 Dermaga Tengah</strong></p>
+                    <p>• Lokasi: <strong>FTW-02 Pintu 2</strong></p>
                   </div>
                 </div>
               </div>

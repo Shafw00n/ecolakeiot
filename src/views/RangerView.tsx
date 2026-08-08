@@ -25,7 +25,7 @@ export const RangerView: React.FC<RangerViewProps> = ({
   onOpenPublicPortal,
 }) => {
   const [reportForm, setReportForm] = useState({
-    location: 'FTW-01 (Dermaga Utama)',
+    location: 'FTW-01 (Pintu 1)',
     issueType: 'Trash Accumulation' as RangerReport['issueType'],
     description: '',
     severity: 'Medium' as RangerReport['severity'],
@@ -76,7 +76,7 @@ export const RangerView: React.FC<RangerViewProps> = ({
       setIsSubmitting(false);
       setSubmitSuccess(true);
       setReportForm({
-        location: 'FTW-01 (Dermaga Utama)',
+        location: 'FTW-01 (Pintu 1)',
         issueType: 'Trash Accumulation',
         description: '',
         severity: 'Medium',
@@ -202,9 +202,8 @@ export const RangerView: React.FC<RangerViewProps> = ({
                   onChange={(e) => setReportForm({ ...reportForm, location: e.target.value })}
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-800 font-medium"
                 >
-                  <option value="FTW-01 (Dermaga Utama)">FTW-01 (Dermaga Utama Inflow)</option>
-                  <option value="FTW-02 (Zona Tengah)">FTW-02 (Mid-Lake Bio-Filtrasi)</option>
-                  <option value="FTW-03 (Outflow Selatan)">FTW-03 (Zona Outlet Danau)</option>
+                  <option value="FTW-01 (Pintu 1)">FTW-01 (Pintu 1 - Tepi Barat)</option>
+                  <option value="FTW-02 (Pintu 2)">FTW-02 (Pintu 2 - Tepi Timur)</option>
                   <option value="Tepi Barat Situ Gede">Tepi Barat Situ Gede</option>
                   <option value="Area Pemukiman Warga">Area Pemukiman Sekitar Danau</option>
                 </select>
