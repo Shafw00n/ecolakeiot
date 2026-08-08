@@ -80,8 +80,8 @@ export const INITIAL_FTW_UNITS: FTWUnit[] = [
     lastMaintenance: '2026-07-28',
     lat: -6.5532,
     lng: 106.7511,
-    mapX: 24,
-    mapY: 55,
+    mapX: 14,
+    mapY: 50,
   },
   {
     id: 'FTW-02',
@@ -97,8 +97,8 @@ export const INITIAL_FTW_UNITS: FTWUnit[] = [
     lastMaintenance: '2026-07-15',
     lat: -6.5545,
     lng: 106.7525,
-    mapX: 76,
-    mapY: 55,
+    mapX: 86,
+    mapY: 50,
   },
 ];
 
