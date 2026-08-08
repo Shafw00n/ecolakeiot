@@ -187,9 +187,20 @@ const MonitoringDashboard: React.FC = () => {
         ? 'warning'
         : 'good';
     const decimals = th.key === 'pH' || th.key === 'DO' ? 2 : th.key === 'tds' ? 0 : 1;
+    const shortLabel =
+      th.key === 'pH'
+        ? 'pH'
+        : th.key === 'DO'
+        ? 'DO'
+        : th.key === 'temperature'
+        ? 'Temperature'
+        : th.key === 'turbidity'
+        ? 'Turbidity'
+        : 'TDS';
     return {
       key: th.key,
       label: th.label,
+      shortLabel,
       value: value.toFixed(decimals),
       unit: th.unit,
       icon: th.icon,
@@ -313,7 +324,7 @@ const MonitoringDashboard: React.FC = () => {
               <div key={p.key} className="flex items-center justify-between">
                 <span className="text-slate-500 flex items-center gap-1.5">
                   <span className={`w-1.5 h-1.5 rounded-full ${p.style.dot}`} />
-                  {p.label.split(' (')[0]}
+                  {p.shortLabel}
                 </span>
                 <span className="font-bold text-slate-800">
                   {p.value} {p.unit}

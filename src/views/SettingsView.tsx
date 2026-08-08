@@ -3,8 +3,13 @@ import MaterialIcon from '../components/MaterialIcon';
 
 export const SettingsView: React.FC = () => {
   const [telemetryInterval, setTelemetryInterval] = useState('5');
+  const [phMin, setPhMin] = useState('6.5');
+  const [phMax, setPhMax] = useState('8.5');
   const [doThreshold, setDoThreshold] = useState('6.0');
-  const [turbidityThreshold, setTurbidityThreshold] = useState('20.0');
+  const [tempMin, setTempMin] = useState('25');
+  const [tempMax, setTempMax] = useState('31');
+  const [turbidityThreshold, setTurbidityThreshold] = useState('25');
+  const [tdsThreshold, setTdsThreshold] = useState('340');
   const [enableSoundAlerts, setEnableSoundAlerts] = useState(true);
   const [savedSuccess, setSavedSuccess] = useState(false);
 
@@ -78,11 +83,35 @@ export const SettingsView: React.FC = () => {
             <span>Batas Ambang Peringatan (Alert Thresholds)</span>
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+            {/* pH */}
+            <div className="sm:col-span-2 lg:col-span-1">
+              <label className="block text-slate-700 font-bold mb-1">pH</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  step="0.1"
+                  value={phMin}
+                  onChange={(e) => setPhMin(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-800 font-bold"
+                />
+                <span className="font-bold text-slate-400">s/d</span>
+                <input
+                  type="number"
+                  step="0.1"
+                  value={phMax}
+                  onChange={(e) => setPhMax(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-800 font-bold"
+                />
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Rentang optimal: {phMin} – {phMax}
+              </p>
+            </div>
+
+            {/* DO */}
             <div>
-              <label className="block text-slate-700 font-bold mb-1">
-                Batas Minimum DO (Dissolved Oxygen)
-              </label>
+              <label className="block text-slate-700 font-bold mb-1">DO (Dissolved Oxygen)</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
@@ -94,14 +123,38 @@ export const SettingsView: React.FC = () => {
                 <span className="font-bold text-slate-500">mg/L</span>
               </div>
               <p className="text-[11px] text-slate-400 mt-1">
-                Peringatan otomatis aktif jika DO &lt; {doThreshold} mg/L
+                Peringatan jika DO &lt; {doThreshold} mg/L
               </p>
             </div>
 
+            {/* Temperature */}
+            <div className="sm:col-span-2 lg:col-span-1">
+              <label className="block text-slate-700 font-bold mb-1">Temperature (Suhu Air)</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  step="0.5"
+                  value={tempMin}
+                  onChange={(e) => setTempMin(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-800 font-bold"
+                />
+                <span className="font-bold text-slate-400">s/d</span>
+                <input
+                  type="number"
+                  step="0.5"
+                  value={tempMax}
+                  onChange={(e) => setTempMax(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-800 font-bold"
+                />
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Rentang optimal: {tempMin} – {tempMax} °C
+              </p>
+            </div>
+
+            {/* Turbidity */}
             <div>
-              <label className="block text-slate-700 font-bold mb-1">
-                Batas Maksimum Turbiditas (Kekeruhan)
-              </label>
+              <label className="block text-slate-700 font-bold mb-1">Turbidity (Kekeruhan)</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
@@ -113,7 +166,25 @@ export const SettingsView: React.FC = () => {
                 <span className="font-bold text-slate-500">NTU</span>
               </div>
               <p className="text-[11px] text-slate-400 mt-1">
-                Peringatan otomatis aktif jika Kekeruhan &gt; {turbidityThreshold} NTU
+                Peringatan jika Kekeruhan &gt; {turbidityThreshold} NTU
+              </p>
+            </div>
+
+            {/* TDS */}
+            <div>
+              <label className="block text-slate-700 font-bold mb-1">TDS (Total Dissolved Solids)</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  step="10"
+                  value={tdsThreshold}
+                  onChange={(e) => setTdsThreshold(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-800 font-bold"
+                />
+                <span className="font-bold text-slate-500">mg/L</span>
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Peringatan jika TDS &gt; {tdsThreshold} mg/L
               </p>
             </div>
           </div>
