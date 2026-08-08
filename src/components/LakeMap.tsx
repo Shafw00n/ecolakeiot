@@ -102,25 +102,26 @@ export const LakeMap: React.FC<LakeMapProps> = ({ ftwUnits, metrics, onSelectUni
         
         {/* Lake Water Vector SVG Shape */}
         <svg
-          viewBox="0 0 800 500"
-          className="w-full h-full object-cover opacity-85 absolute inset-0 pointer-events-none"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="w-full h-full opacity-85 absolute inset-0 pointer-events-none"
         >
           {/* Lake Shore outline */}
           <path
-            d="M 120 180 C 180 80, 420 70, 680 140 C 760 210, 750 380, 620 440 C 450 490, 220 450, 100 360 C 50 290, 80 240, 120 180 Z"
+            d="M 15 36 C 22.5 16, 52.5 14, 85 28 C 95 42, 93.75 76, 77.5 88 C 56.25 98, 27.5 90, 12.5 72 C 6.25 58, 10 48, 15 36 Z"
             fill="#38bdf8"
             fillOpacity="0.3"
             stroke="#0284c7"
-            strokeWidth="3"
-            strokeDasharray="6 4"
+            strokeWidth="0.6"
+            strokeDasharray="2 1.2"
           />
           <path
-            d="M 150 200 C 210 110, 400 100, 640 160 C 710 220, 700 350, 590 410 C 430 450, 240 420, 130 340 C 90 280, 110 240, 150 200 Z"
+            d="M 18.75 40 C 26.25 22, 50 20, 80 26 C 88.75 32, 87.5 58, 73.75 70 C 56.25 75, 30 72, 16.25 58 C 11.25 52, 13.75 46, 18.75 40 Z"
             fill="#0ea5e9"
             fillOpacity="0.25"
           />
           {/* Depth Contours */}
-          <ellipse cx="420" cy="270" rx="180" ry="90" fill="#0284c7" fillOpacity="0.2" />
+          <ellipse cx="52.5" cy="28" rx="22.5" ry="9" fill="#0284c7" fillOpacity="0.2" />
         </svg>
 
         {/* Map Grid overlay */}
