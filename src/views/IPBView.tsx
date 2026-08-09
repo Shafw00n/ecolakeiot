@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { LaboratorySample, PlantSpeciesPerformance, PublicComplaint, WaterMetrics, ComplaintStatus } from '../types';
-import { PLANT_SPECIES_DATA } from '../data/mockData';
+import { LaboratorySample, PublicComplaint, WaterMetrics, ComplaintStatus } from '../types';
 import MaterialIcon from '../components/MaterialIcon';
 import PublicComplaintsList from '../components/PublicComplaintsList';
 
@@ -90,78 +89,6 @@ export const IPBView: React.FC<IPBViewProps> = ({
             <MaterialIcon name="biotech" className="text-base" />
             <span>Input Sampel Lab Baru</span>
           </button>
-        </div>
-      </div>
-
-      {/* Plant Species Bio-Filtration Performance Panel */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs">
-        <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
-          <div className="flex items-center gap-2">
-            <MaterialIcon name="grass" className="text-emerald-600 text-2xl" />
-            <div>
-              <h3 className="font-bold text-slate-900 text-sm">Evaluasi Kinerja Spesies Tanaman FTW</h3>
-              <p className="text-xs text-slate-500">Kapasitas Serapan Nutrien (Nitrat & Fosfat)</p>
-            </div>
-          </div>
-          <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-            3 Spesies Utama
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {PLANT_SPECIES_DATA.map((plant) => (
-            <div
-              key={plant.id}
-              className="p-4 rounded-xl border border-slate-200/90 bg-slate-50/50 hover:bg-white transition-all hover:border-emerald-300 shadow-xs flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md">
-                    Spesies FTW
-                  </span>
-                  <span className="text-xs font-extrabold text-slate-800">
-                    Health: {plant.healthIndex}%
-                  </span>
-                </div>
-
-                <h4 className="font-extrabold text-sm text-slate-900 mt-1">{plant.commonName}</h4>
-                <p className="text-xs italic text-slate-500 mb-3">{plant.botanicalName}</p>
-
-                <div className="space-y-2 text-xs">
-                  <div>
-                    <div className="flex justify-between text-slate-600 mb-1">
-                      <span>Serapan Nitrat (N)</span>
-                      <span className="font-bold text-emerald-700">{plant.nitrogenRemovalRate}%</span>
-                    </div>
-                    <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                      <div
-                        className="bg-emerald-500 h-full rounded-full"
-                        style={{ width: `${plant.nitrogenRemovalRate}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between text-slate-600 mb-1">
-                      <span>Serapan Fosfat (P)</span>
-                      <span className="font-bold text-teal-700">{plant.phosphateRemovalRate}%</span>
-                    </div>
-                    <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-                      <div
-                        className="bg-teal-500 h-full rounded-full"
-                        style={{ width: `${plant.phosphateRemovalRate}%` }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                <span>Peningkatan DO: +{plant.doEnhancement} mg/L</span>
-                <span>Siklus: {plant.growthRateDays} Hari</span>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
 

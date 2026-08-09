@@ -70,12 +70,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           icon: 'database',
           description: 'Database Sensor Terpusat',
         },
-        {
-          id: 'settings' as ActiveTab,
-          label: 'Threshold Baku Mutu',
-          icon: 'settings',
-          description: 'Pengaturan Ambang Batas Air',
-        },
+
       ];
     }
 
