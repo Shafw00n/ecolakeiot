@@ -5,7 +5,6 @@ import MonitoringDashboard from '../views/MonitoringDashboard';
 import RangerView from '../views/RangerView';
 import DatabaseView from '../views/DatabaseView';
 import SettingsView from '../views/SettingsView';
-import PublicComplaintsList from '../components/PublicComplaintsList';
 import { ActiveTab } from '../components/Sidebar';
 
 interface OutletCtx {
@@ -35,12 +34,6 @@ export const RangerDashboard: React.FC = () => {
   if (activeTab === 'ranger_checklist') {
     return (
       <div className="space-y-6">
-        <PublicComplaintsList
-          complaints={publicComplaints}
-          userRole="ranger"
-          onUpdateStatus={handleUpdateComplaintStatus}
-          onOpenPublicPortal={openPublicPortal}
-        />
         <RangerView
           checklist={rangerChecklist}
           reports={rangerReports}
@@ -57,10 +50,6 @@ export const RangerDashboard: React.FC = () => {
 
   if (activeTab === 'database') {
     return <DatabaseView ftwUnits={ftwUnits} metrics={waterMetrics} />;
-  }
-
-  if (activeTab === 'settings') {
-    return <SettingsView />;
   }
 
   return <MonitoringDashboard />;

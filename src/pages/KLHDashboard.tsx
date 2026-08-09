@@ -25,10 +25,6 @@ export const KLHDashboard: React.FC = () => {
     return <DatabaseView ftwUnits={ftwUnits} metrics={waterMetrics} />;
   }
 
-  if (activeTab === 'settings') {
-    return <SettingsView />;
-  }
-
   return (
     <KLHView
       lakes={INITIAL_LAKE_COMPARISONS}

@@ -70,7 +70,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           icon: 'database',
           description: 'Database Sensor Terpusat',
         },
-
       ];
     }
 
@@ -124,12 +123,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         label: 'Database Sensor Field',
         icon: 'database',
         description: 'Tabel Sensor IoT Lapangan',
-      },
-      {
-        id: 'settings' as ActiveTab,
-        label: 'Notifikasi & HP Ranger',
-        icon: 'smartphone',
-        description: 'Pengaturan Alert Push Ranger',
       },
     ];
   };
